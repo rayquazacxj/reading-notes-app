@@ -77,7 +77,7 @@ export default class Timelinee extends React.Component {
                 innerCircle={'dot'}
                 />
 
-                {/*<GoToButton screenName="Mindmap" />*/}
+                <GoToButton screenName="Mindmap" />
 
                 <Container style={styles.input,{flex:2,padding:10}}>
                     <Item >
