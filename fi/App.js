@@ -21,10 +21,11 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';*/
-import { NavigationContainer } from '@react-navigation/native';
+
 import { Container, Header, View, Fab, Button, Icon ,Text,Content, Footer, FooterTab,} from 'native-base';
 
-/*
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import {BackHandler} from 'react-native';
 import {Root, StyleProvider} from 'native-base';
@@ -32,10 +33,9 @@ import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'redux-logger';
 import {Provider, connect} from 'react-redux';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-const Stack = createStackNavigator();*/
+
+const Stack = createStackNavigator();
 /*
 const appReducer = {
     search, toast, post, postForm, postItem
@@ -66,8 +66,9 @@ export default class App extends React.Component {
 }
 */
 
-//import Timeline from 'react-native-timeline-flatlist'
-import Timelinee from './src/timeline'
+
+import Timelinee from './src/component/timeline'
+import Mindmap from './src/component/mindmap'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -79,8 +80,14 @@ export default class App extends React.Component {
   render() {
       return (
           <NavigationContainer style={styles.flex}>
+            <Root>
+              <Stack.Navigator initialRouteName="Timelinee">
+                  <Stack.Screen name="Timelinee" component={Timelinee} />
+                  <Stack.Screen name="Mindmap" component={Mindmap} />
+              </Stack.Navigator>
+            </Root>
             <Header></Header>
-            <Timelinee ></Timelinee>
+            {/*<Timelinee ></Timelinee>*/}
 
             <Fab
               active={this.state.active}

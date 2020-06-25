@@ -9,8 +9,12 @@ import {
   } from 'react-native'
 
 import { Container, Header, Content, Item, Input ,Text, Button} from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+
+import {GoToButton} from 'C:/Users/USER/Desktop/f1/ss_final/fi/src/api/navigation';
 
 export default class Timelinee extends React.Component {
+    
     /*
     static propTypes = {
         id: PropTypes.string.isRequired,
@@ -42,6 +46,8 @@ export default class Timelinee extends React.Component {
         
           this.handleInputChange = this.handleInputChange.bind(this);
           this.handleAddData = this.handleAddData.bind(this)
+          //this.GoToButton = this.GoToButton.bind(this)
+
         /*this.data.sort(function (a, b) {
             return a.time > b.time ? 1 : -1;
            });*/
@@ -70,6 +76,8 @@ export default class Timelinee extends React.Component {
                 data={this.state.data}
                 innerCircle={'dot'}
                 />
+
+                {/*<GoToButton screenName="Mindmap" />*/}
 
                 <Container style={styles.input,{flex:2,padding:10}}>
                     <Item >
@@ -123,6 +131,8 @@ export default class Timelinee extends React.Component {
             console.log(this.state.data)
         }
     }
+
+    
 /*
     handleTooltipToggle() {
         this.props.dispatch(toggleTooltip(this.props.id));
