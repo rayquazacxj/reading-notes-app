@@ -11,7 +11,6 @@ import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
-  Text,
   StatusBar,
 } from 'react-native';
 /*
@@ -23,7 +22,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';*/
 import { NavigationContainer } from '@react-navigation/native';
-import { Container, Header, View, Fab, Button, Icon } from 'native-base';
+import { Container, Header, View, Fab, Button, Icon ,Text,Content, Footer, FooterTab,} from 'native-base';
 
 /*
 import 'react-native-gesture-handler';
@@ -79,31 +78,51 @@ export default class App extends React.Component {
   }
   render() {
       return (
-          <NavigationContainer>
-            <Timelinee></Timelinee>
+          <NavigationContainer style={styles.flex}>
+            <Header></Header>
+            <Timelinee ></Timelinee>
 
-            <Container>
-              <View style={{ flex: 1 }}>
-                <Fab
-                  active={this.state.active}
-                  direction="up"
-                  containerStyle={{ }}
-                  style={{ backgroundColor: '#5067FF' }}
-                  position="bottomRight"
-                  onPress={() => this.setState({ active: !this.state.active })}>
-                  <Icon name="share" />
-                  <Button style={{ backgroundColor: '#34A34F' }}>
-                    <Icon name="logo-whatsapp" />
-                  </Button>
-                  <Button style={{ backgroundColor: '#3B5998' }}>
-                    <Icon name="logo-facebook" />
-                  </Button>
-                  <Button disabled style={{ backgroundColor: '#DD5144' }}>
-                    <Icon name="mail" />
-                  </Button>
-                </Fab>
-              </View>
-          </Container>
+            <Fab
+              active={this.state.active}
+              direction="up"
+              containerStyle={{ }}
+              style={{ backgroundColor: '#5067FF' }}
+              position="bottomRight"
+              onPress={() => this.setState({ active: !this.state.active })}>
+              <Icon name="share" />
+              <Button style={{ backgroundColor: '#34A34F' }}>
+                <Icon name="logo-whatsapp" />
+              </Button>
+              <Button style={{ backgroundColor: '#3B5998' }}>
+                <Icon name="logo-facebook" />
+              </Button>
+              <Button disabled style={{ backgroundColor: '#DD5144' }}>
+                <Icon name="mail" />
+              </Button>
+            </Fab>
+            
+
+            <Footer>
+              <FooterTab>
+                <Button vertical>
+                  <Icon name="apps" />
+                  <Text>Apps</Text>
+                </Button>
+                <Button vertical>
+                  <Icon name="camera" />
+                  <Text>Camera</Text>
+                </Button>
+                <Button vertical active>
+                  <Icon active name="navigate" />
+                  <Text>Navigate</Text>
+                </Button>
+                <Button vertical>
+                  <Icon name="person" />
+                  <Text>Contact</Text>
+                </Button>
+              </FooterTab>
+            </Footer>
+          
 
           </NavigationContainer>
       );
@@ -113,7 +132,11 @@ export default class App extends React.Component {
 
 
 const styles = StyleSheet.create({
-  
+  flex:{
+    flexDirection: 'column',
+    justifyContent:"center",
+    alignItems: 'stretch',
+  },
 });
 
 //export default App;
