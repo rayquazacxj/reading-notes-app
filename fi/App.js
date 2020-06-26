@@ -29,21 +29,27 @@ import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import {BackHandler} from 'react-native';
 import {Root, StyleProvider} from 'native-base';
+
 import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'redux-logger';
 import {Provider, connect} from 'react-redux';
 
+import {ConnectMindmapItem , MindmapInfo} from './src/state/mindmap_reducer'
+
+import Timelinee from './src/component/timeline'
+import Mindmap from './src/component/mindmap'
+import PictureGen from './src/component/pictureGen'
 
 const Stack = createStackNavigator();
-/*
+
 const appReducer = {
-    search, toast, post, postForm, postItem
+    ConnectMindmapItem,MindmapInfo
 };
 
 const store = createStore(combineReducers(appReducer), 
     compose(applyMiddleware(thunkMiddleware, loggerMiddleware)));
-*/
+
 /*
 export default class App extends React.Component {
   render() {
@@ -67,9 +73,6 @@ export default class App extends React.Component {
 */
 
 
-import Timelinee from './src/component/timeline'
-import Mindmap from './src/component/mindmap'
-import PictureGen from './src/component/pictureGen'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -81,15 +84,16 @@ export default class App extends React.Component {
   render() {
       return (
           <NavigationContainer style={styles.flex}>
-            <Root>
-              <Stack.Navigator initialRouteName="Mindmap">
-                  <Stack.Screen name="Timelinee" component={Timelinee} />
-                  <Stack.Screen name="Mindmap" component={Mindmap} />
-                  <Stack.Screen name="PictureGen" component={PictureGen} />
-              </Stack.Navigator>
-            </Root>
+            <Provider store={store}>
+              <Root>
+                <Stack.Navigator initialRouteName="Mindmap">
+                    <Stack.Screen name="Timelinee" component={Timelinee} />
+                    <Stack.Screen name="Mindmap" component={Mindmap} />
+                    <Stack.Screen name="PictureGen" component={PictureGen} />
+                </Stack.Navigator>
+              </Root>
+            </Provider>
             
-            {/*<Timelinee ></Timelinee>*/}
 
             <Fab
               active={this.state.active}

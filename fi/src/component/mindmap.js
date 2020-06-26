@@ -15,8 +15,9 @@ import {
 import { Container, Header, Content, Item, Input , Button} from 'native-base';
 import Draggable from 'react-native-draggable'
 import MindmapItem from './mindmapItem'
+import {connect} from 'react-redux';
 
-export default class Mindmap extends React.Component {
+class Mindmap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,10 +27,13 @@ export default class Mindmap extends React.Component {
     }
 
     render() {
+        const {selectedKey1} = this.props;
+        console.log(selectedKey1)
+
         let added_buttons_goes_here =  []
         for(let i=0; i<this.state.itemNum ; i++){
             added_buttons_goes_here.push(
-                <MindmapItem key={i} ></MindmapItem>
+                <MindmapItem  key={i}></MindmapItem>
             )
         }
         
@@ -103,3 +107,8 @@ const styles = StyleSheet.create({
 
     
 });
+
+export default connect(state => ({
+    ...state.ConnectMindmapItem,
+
+}))(Mindmap);

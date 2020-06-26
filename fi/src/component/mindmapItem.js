@@ -9,28 +9,33 @@ import {
   } from 'react-native'
 import Draggable from 'react-native-draggable'
 import { Button} from 'native-base';
+import {connect} from 'react-redux';
 
-export default class MindmapItem extends React.Component {
+class MindmapItem extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
+        console.log(this.props)
         this.state = {
             text:"",
             disabled: false
         }
         this.handleEdit = this.handleEdit.bind(this)
-        this.handlePress = this.handlePress.bind(this)
-        //this.hasSubItem = this.hasSubItem.bind(this)
+       
+        
     }
     render() {
+        console.log(this.props.mindmapItemNum)
+
         return(
-            <Draggable x={50/*this.getRandomInt(50,-50)*/} y={100/*this.getRandomInt(50,-50)*/} disabled={this.state.disabled} >
-                <TouchableHighlight onPressIn={()=>this.setState({subItem: this.state.subItem+1 , disabled: false })} underlayColor="green">
+        
+            <Draggable x={50} y={100} disabled={this.state.disabled} >
+                <TouchableHighlight onPressIn={()=>this.setState({  disabled: false })} underlayColor="green">
                     <View style={{padding:10},styles.buttont}>
                         <TextInput
                             placeholder="Type  here"
                             onChangeText={this.handleEdit}
                         />
-                        <Text> Hello {this.state.text}  </Text>
+                        <Text> Hello {this.state.text} {this.props.key} </Text>
                         <TouchableOpacity style={{padding:10},styles.button} onPressIn={(evt)=>{this.setState({disabled: true }); console.log('press',evt.nativeEvent.locationX)}} onPress={(evt)=>{ this.setState({disabled: false }); console.log('no press',this.state.disabled,evt.nativeEvent.locationX)}} />
                             
                         
@@ -38,35 +43,12 @@ export default class MindmapItem extends React.Component {
                 </TouchableHighlight>
             </Draggable> 
         )
-    }/*
-    handlePressOut(){
-        setTimeout
-        this.setState({disabled: false });
-        console.log('no press')
-    }*/
+    }
     getRandomInt(max,min) {
         return Math.floor(Math.random() * Math.floor(max-min));
     }
 
-    ItemRenderer() {
-        //if(this.state.subItem)console.log('hihi')
-        /*
-        if(this.state.subItem){
-            let subItemSet = []
-            for(let i =0;i<this.state.subItem;i++){
-                subItemSet.push(<MindmapItem />)
-            }
-            return subItemSet 
-        }*/
-        /*this.state.list.map(listing =>
-             <View key={'view ' + listing}>
-                 <Text key={'text ' + listing } style={{ color: 'black' }}>
-                     {listing}
-                 </Text>
-             </View>
-         );*/
-     }
-
+    
      
     handleEdit = typedText => {
         console.log("update => ", typedText);
@@ -75,13 +57,7 @@ export default class MindmapItem extends React.Component {
         });
     };
 
-    handlePress(){
-        alert('handlePress!')
-        return(
-            <MindmapItem  />
-        )
-    }
-
+    
     
 }
 
@@ -105,3 +81,9 @@ const styles = StyleSheet.create({
 
     
 });
+
+export default connect(state => ({
+    ...state.ConnectMindmapItem,
+    mindmapItemNum: state.MindmapInfo.mindmapItemNum
+    
+}))(MindmapItem);
