@@ -19,54 +19,69 @@ import MindmapItem from './mindmapItem'
 export default class Mindmap extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text:""}
+        this.state = {
+            itemNum:1,
+        }
         //this.handlePress = this.handlePress.bind(this)
     }
 
-    render() {/*
-        let itemSet = []
-        for(let i =0;i<this.state.addSetsCounter;i++){
-            itemSet.push(<AddSets key="AddSets-{i}"/>);
-        }*/
+    render() {
+        let added_buttons_goes_here =  []
+        for(let i=0; i<this.state.itemNum ; i++){
+            added_buttons_goes_here.push(
+                <MindmapItem key={i} ></MindmapItem>
+            )
+        }
+        
 
         return(
             <Container >
-                <Text> SCREEN2~ </Text>
+                <Text> SCREEN2~! </Text>
                 <Item rounded >
                     <Input placeholder="SCREEN2" />
                 </Item> 
-                {/*}
-                <Draggable x={50} y={50}>
-                    <TouchableHighlight onPress={()=>alert('You tapped the button!')} underlayColor="green">
-                        <View style={{padding:10},styles.buttont}>
-                            <Text> HI~ </Text>
-                        </View>
-                    </TouchableHighlight>
-                </Draggable> 
-
-                <Draggable x={100} y={400} renderColor='red' renderText='ABC'/>
-
-                <TouchableHighlight onPress={()=>alert('You tapped the button!')} underlayColor="green">
-                    <View style={{padding:10},styles.buttont}>
-                        <TextInput
-                            placeholder="Type  here"
-                            onChangeText={this.handleEdit}
-                        />
-                        <Text> Hellow~ {this.state.text} </Text>
-                    </View>
-                    
-                </TouchableHighlight>*/}
-
-                <MindmapItem/>
-                <MindmapItem/>
+                   
                 
+                  
+
+                <View>
+                    <Button title="Add more" onPress={()=>this.setState({itemNum: this.state.itemNum+1 })} >
+                        <Text style={{color:'white'}}>      Add more</Text>
+                    </Button>
+                    {added_buttons_goes_here}
+                </View>
+
             </Container>
+
         )
         
-    }/*
-    handlePress(){
+    }
+    /*
+    handleAddButton() {
+        let newKey = (this.state.data)? this.state.data.length : 0;
+        let newly_added_data = {
+            
+            key: newKey,
+            content: 'new content goes here'
+        };
+    
+        this.setState({
+            data: [...this.state.data, newly_added_data]
+        });
+    }*/
 
-    }*//*
+    /*
+    _handleRemoveButton(key) {
+        let result = this.state.data.filter( (data) => data.key !== key );
+    
+        this.setState({
+            data: result,
+        });
+    }
+    */
+    
+    
+    /*
     handlePress(){
         alert('handlePress!')
         return(

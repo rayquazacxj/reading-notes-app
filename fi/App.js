@@ -69,6 +69,7 @@ export default class App extends React.Component {
 
 import Timelinee from './src/component/timeline'
 import Mindmap from './src/component/mindmap'
+import PictureGen from './src/component/pictureGen'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -84,9 +85,10 @@ export default class App extends React.Component {
               <Stack.Navigator initialRouteName="Mindmap">
                   <Stack.Screen name="Timelinee" component={Timelinee} />
                   <Stack.Screen name="Mindmap" component={Mindmap} />
+                  <Stack.Screen name="PictureGen" component={PictureGen} />
               </Stack.Navigator>
             </Root>
-            <Header></Header>
+            
             {/*<Timelinee ></Timelinee>*/}
 
             <Fab
@@ -106,6 +108,7 @@ export default class App extends React.Component {
               <Button disabled style={{ backgroundColor: '#DD5144' }}>
                 <Icon name="mail" />
               </Button>
+            
             </Fab>
             
 
