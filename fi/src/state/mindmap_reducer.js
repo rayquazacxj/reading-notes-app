@@ -16,6 +16,14 @@ export function ConnectMindmapItem(state = initMindMapState, action) {
             }
         
         case '@MINDMAP_CONNECT/UPDATE_CONNECTSET':
+            if(state.selectedKey1 == state.selectedKey2){
+                return{
+                    ...state,
+                    selectedKey2: null,
+                    selectNum:    1
+                }
+            }
+
             let newConnect = [state.selectedKey1 , state.selectedKey2]
             return {
                 ...state,
@@ -32,7 +40,7 @@ export function ConnectMindmapItem(state = initMindMapState, action) {
 }
 
 const initMindMapInfo = {
-    mindmapItemNum:1
+    mindmapItemNum:0
 };
 
 export function MindmapInfo(state = initMindMapInfo, action) {

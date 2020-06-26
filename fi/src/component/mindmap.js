@@ -16,22 +16,24 @@ import { Container, Header, Content, Item, Input , Button} from 'native-base';
 import Draggable from 'react-native-draggable'
 import MindmapItem from './mindmapItem'
 import {connect} from 'react-redux';
+import {update_mindmapItemNum } from '../state/mindmap-action'
+
 
 class Mindmap extends React.Component {
     constructor(props) {
-        super(props);
+        super(props);/*
         this.state = {
             itemNum:1,
-        }
-        //this.handlePress = this.handlePress.bind(this)
+        }*/
+        this.handleAddButton = this.handleAddButton.bind(this)
     }
 
     render() {
-        const {selectedKey1} = this.props;
-        console.log(selectedKey1)
+        const {selectedKey1,mindmapItemNum} = this.props;
+        console.log(selectedKey1,mindmapItemNum)
 
         let added_buttons_goes_here =  []
-        for(let i=0; i<this.state.itemNum ; i++){
+        for(let i=0; i<mindmapItemNum ; i++){
             added_buttons_goes_here.push(
                 <MindmapItem  key={i}></MindmapItem>
             )
@@ -49,7 +51,7 @@ class Mindmap extends React.Component {
                   
 
                 <View>
-                    <Button title="Add more" onPress={()=>this.setState({itemNum: this.state.itemNum+1 })} >
+                    <Button title="Add more" onPress={this.handleAddButton} >
                         <Text style={{color:'white'}}>      Add more</Text>
                     </Button>
                     {added_buttons_goes_here}
@@ -59,6 +61,9 @@ class Mindmap extends React.Component {
 
         )
         
+    }
+    handleAddButton() {
+        this.props.dispatch(update_mindmapItemNum());      
     }
     /*
     handleAddButton() {
@@ -110,5 +115,5 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
     ...state.ConnectMindmapItem,
-
+    mindmapItemNum : state.MindmapInfo.mindmapItemNum
 }))(Mindmap);

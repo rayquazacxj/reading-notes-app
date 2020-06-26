@@ -10,33 +10,35 @@ import {
 import Draggable from 'react-native-draggable'
 import { Button} from 'native-base';
 import {connect} from 'react-redux';
+import {set_connect_candidate, update_connectSet} from '../state/mindmap-action'
 
 class MindmapItem extends React.Component {
     constructor(props) {
         super(props)
         console.log(this.props)
         this.state = {
+            id:null,
             text:"",
             disabled: false
         }
         this.handleEdit = this.handleEdit.bind(this)
-       
+        this.handleSetConnect = this.handleSetConnect.bind(this)
         
     }
     render() {
         console.log(this.props.mindmapItemNum)
 
         return(
-        
+    
             <Draggable x={50} y={100} disabled={this.state.disabled} >
-                <TouchableHighlight onPressIn={()=>this.setState({  disabled: false })} underlayColor="green">
+                <TouchableHighlight onPressIn={()=>this.setState({disabled: false })} underlayColor="green">
                     <View style={{padding:10},styles.buttont}>
                         <TextInput
                             placeholder="Type  here"
                             onChangeText={this.handleEdit}
                         />
-                        <Text> Hello {this.state.text} {this.props.key} </Text>
-                        <TouchableOpacity style={{padding:10},styles.button} onPressIn={(evt)=>{this.setState({disabled: true }); console.log('press',evt.nativeEvent.locationX)}} onPress={(evt)=>{ this.setState({disabled: false }); console.log('no press',this.state.disabled,evt.nativeEvent.locationX)}} />
+                        <Text> Hello {this.state.text} {this.state.id} </Text>
+                        <TouchableOpacity style={{padding:10},styles.button} onPressIn={this.handleSetConnect} onPress={(evt)=>{ this.setState({disabled: false }); console.log('no press',this.state.disabled,evt.nativeEvent.locationX)}} />
                             
                         
                     </View>
@@ -44,6 +46,27 @@ class MindmapItem extends React.Component {
             </Draggable> 
         )
     }
+
+    componentDidMount() {
+        this.setState({  
+            id:this.props.mindmapItemNum
+        })
+        console.log('componentDidMount: ',this.state.id)
+    }
+
+    handleSetConnect(){
+        this.setState({  
+            disabled:true
+        })
+        this.props.dispatch(set_connect_candidate(this.state.id));
+
+        if(this.props.selectNum>0){
+            this.props.dispatch(update_connectSet());
+        }
+
+        console.log('selectedKey1: ',this.props.selectedKey1)
+    }
+
     getRandomInt(max,min) {
         return Math.floor(Math.random() * Math.floor(max-min));
     }
@@ -65,7 +88,7 @@ const styles = StyleSheet.create({
     buttont: {
         marginBottom: 30,
         width: 200,
-        height:200,
+        height:150,
         borderRadius:100,
         alignItems: 'center',
         backgroundColor: 'yellow'

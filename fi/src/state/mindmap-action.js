@@ -4,6 +4,11 @@ export function set_connect_candidate(candidate) {
         candidate
     };
 }
+export function update_connectSet() {
+    return {
+        type: '@MINDMAP_CONNECT/UPDATE_CONNECTSET',
+    };
+}
 
 
 export function update_mindmapItemNum() {
@@ -12,6 +17,8 @@ export function update_mindmapItemNum() {
        
     };
 }
+
+
 
 
 
