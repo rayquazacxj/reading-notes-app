@@ -10,27 +10,11 @@ import {
 
 import { Container, Header, Content, Item, Input ,Text, Button} from 'native-base';
 import { useNavigation } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import {GoToButton} from 'C:/Users/USER/Desktop/f1/ss_final/fi/src/api/navigation';
 
 export default class Timelinee extends React.Component {
     
-    /*
-    static propTypes = {
-        id: PropTypes.string.isRequired,
-        mood: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        clearVotes: PropTypes.number.isRequired,
-        cloudsVotes: PropTypes.number.isRequired,
-        drizzleVotes: PropTypes.number.isRequired,
-        rainVotes: PropTypes.number.isRequired,
-        thunderVotes: PropTypes.number.isRequired,
-        snowVotes: PropTypes.number.isRequired,
-        windyVotes: PropTypes.number.isRequired,
-        tooltipOpen: PropTypes.bool.isRequired,
-        dispatch: PropTypes.func.isRequired
-    };
-*/
     constructor(props) {
         super(props);
 
@@ -46,16 +30,38 @@ export default class Timelinee extends React.Component {
         
           this.handleInputChange = this.handleInputChange.bind(this);
           this.handleAddData = this.handleAddData.bind(this)
-          //this.GoToButton = this.GoToButton.bind(this)
-
-        /*this.data.sort(function (a, b) {
-            return a.time > b.time ? 1 : -1;
-           });*/
-           /*
-           */
-        //this.handleTooltipToggle = this.handleTooltipToggle.bind(this);
-        //this.handleVote = this.handleVote.bind(this);
+        
     }
+
+    componentWillMount(){/*
+        const getData = async () => {
+            try {
+              const timelineDataSet = await AsyncStorage.getItem('timelineData')
+              var timelineData = (timelineDataSet!=null) ? JSON.parse(timelineDataSet) : null;
+              if (timelineData.length > 0) {
+                timelineData = timelineData.filter(t => {
+                        return t.boookId == 1 // temporarily set it as const
+                    });
+                }
+                return timelineData
+            } catch(e) {
+              // error reading value
+            }
+          }
+        this.setState({
+            data: getData
+        });*/
+          /*
+        const storeData = async (boookId) => {
+            try {
+              const jsonValue = JSON.stringify(value)
+              await AsyncStorage.setItem('@storage_Key', jsonValue)
+            } catch (e) {
+              // saving error
+            }
+          }*/
+        
+   }
 
     render() {
         return(
@@ -126,32 +132,31 @@ export default class Timelinee extends React.Component {
 
             this.setState({
                 data : dataArray
-            });
+            });/*
+            const storeData = async () => {
+                try {
+                  let newData = JSON.stringify(dataArray)
+                  //const jsonValue = JSON.stringify(dataArray)
+                  const timelineDataSet = await AsyncStorage.getItem('timelineData')
+                  const newSet = [
+                     newData
+                  ]
+                  let timelineData = (timelineDataSet!=null) ? JSON.parse(timelineDataSet) : null;
+
+                  await AsyncStorage.setItem('@storage_Key', jsonValue)
+                } catch (e) {
+                  // saving error
+                }
+              }*/
 
             console.log(this.state.data)
         }
     }
 
     
-/*
-    handleTooltipToggle() {
-        this.props.dispatch(toggleTooltip(this.props.id));
-    }
 
-    handleVote(vote) {
-        const {dispatch, id} = this.props;
-        dispatch(createVote(id, vote)).then(() => {
-            dispatch(setToast('Voted.'));
-        });
-        dispatch(setTooltipToggle(id, false));
-    }*/
 }
 
-/*
- * When styling a large number of components, use StyleSheet.
- * StyleSheet makes it possible for a component to refer to a style object by ID
- * instead of creating a new style object every time.
- */
 
 const styles = StyleSheet.create({
     Timeline: {
@@ -170,81 +175,9 @@ const styles = StyleSheet.create({
           height:50
       }
 
-    /*
-    listItem: {
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        marginLeft: 0
-    },
-    post: {
-        flexDirection: 'row',
-        alignItems: 'flex-start'
-    },
-    mood: {
-        width: 48,
-        marginLeft: 12,
-        marginRight: 8,
-        top: 12,
-        alignItems: 'center'
-    },
-    moodIcon: {
-        color: appColors.text,
-        fontSize: 32
-    },
-    wrap: {
-        flex: 1
-    },
-    ts: {
-        color: appColors.textLight
-    },
-    text: {
-        fontSize: 17,
-        fontFamily: (Platform.OS === 'ios') ? 'System' : 'Roboto',
-        color: appColors.text,
-        marginTop: 4,
-        marginBottom: 4
-    },
-    vote: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center'
-    },
-    voteResult: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginRight: 4
-    },
-    voteResultIcon: {
-        fontSize: 17,
-        color: appColors.textLight,
-        marginRight: 2
-    },
-    voteResultText: {
-        fontSize: 17,
-        color: appColors.textLight
-    },
-    votePlus: {
-        fontSize: 24,
-        top: 2,
-        color: appColors.textLight
-    },
-    tooltip: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: appColors.mask
-    },
-    tooltipIcon: {
-        fontSize: 24,
-        color: appColors.primaryText,
-        marginHorizontal: 12
-    }*/
+    
 });
+
 /*
 export default connect((state, ownProps) => ({
     tooltipOpen: state.postItem.tooltipOpen[ownProps.id] ? true : false

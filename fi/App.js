@@ -81,7 +81,7 @@ export default class App extends React.Component {
       return (
           <NavigationContainer style={styles.flex}>
             <Root>
-              <Stack.Navigator initialRouteName="Timelinee">
+              <Stack.Navigator initialRouteName="Mindmap">
                   <Stack.Screen name="Timelinee" component={Timelinee} />
                   <Stack.Screen name="Mindmap" component={Mindmap} />
               </Stack.Navigator>
