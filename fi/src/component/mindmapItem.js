@@ -78,17 +78,36 @@ export default class MindmapItem extends React.Component {
         this.setState({
             text: typedText
         });
+
+        AsyncStorage.getItem(this.props.idx,(err, result) => {
+            var ItemData = result ? JSON.parse(result) : []
+            ItemData.text = typedText
+            console.log(ItemData)
+            AsyncStorage.setItem(this.props.idx, JSON.stringify(ItemData),err=>{
+                if(err)console.log('catch err')
+            })
+            console.log('async edited')
+        })
         /*
-        const storeData = async (value) => {
+        const storeData = async (typedText) => {
             try {
-                const ItemData = await AsyncStorage.getItem('@storage_Key')
-                let ItemData = ItemData ? JSON.parse(ItemData) : [];
-                await AsyncStorage.setItem('@storage_Key', value)
+                console.log('async edit')
+                let ItemData = await AsyncStorage.getItem(this.props.idx)
+                    
+
+                ItemData = ItemData ? JSON.parse(ItemData) : [];
+                ItemData.text = typedText
+                console.log(ItemData)
+                await AsyncStorage.setItem(this.props.idx, JSON.stringify(ItemData))
+
             } catch (e) {
+                if(e)console.log('catch err')
               // saving error
             }
           }*/
-    };
+
+          //console.log('end edit',storeData)
+    }
 
     
     

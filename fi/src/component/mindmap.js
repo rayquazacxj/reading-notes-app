@@ -35,7 +35,7 @@ class Mindmap extends React.Component {
         let added_buttons_goes_here =  []
         for(i=0; i<mindmapItemNum ; i++){
             added_buttons_goes_here.push(
-                <MindmapItem  idx={`MindmapItem${i}`}></MindmapItem>
+                <MindmapItem  key={i} idx={`MindmapItem${i}`}></MindmapItem>
             )
         }
         
