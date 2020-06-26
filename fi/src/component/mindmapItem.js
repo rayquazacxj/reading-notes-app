@@ -30,7 +30,7 @@ class MindmapItem extends React.Component {
 
         return(
     
-            <Draggable x={50} y={100} disabled={this.state.disabled} >
+            <Draggable x={50} y={100} disabled={this.state.disabled} onDrag={(evt)=>console.log('on drag',evt.nativeEvent.locationX)}>
                 <TouchableHighlight onPressIn={()=>this.setState({disabled: false })} underlayColor="green">
                     <View style={{padding:10},styles.buttont}>
                         <TextInput
