@@ -23,6 +23,7 @@ export function ConnectMindmapItem(state = initMindMapState, action) {
                     selectNum:    1
                 }
             }
+            
 
             let newConnect = [state.selectedKey1 , state.selectedKey2]
             return {
