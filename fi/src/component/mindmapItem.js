@@ -75,20 +75,23 @@ class MindmapItem extends React.Component {
         return Math.floor(Math.random() * Math.floor(max-min));
     }
 
-    async handleDragRelease(evt){/*
+    async handleDragRelease(evt){
+        evt.persist();
+        console.log(evt.nativeEvent.locationX,evt.nativeEvent.locationY)
         let ItemData = await AsyncStorage.getItem(this.props.idx)
         ItemData = ItemData ? JSON.parse(ItemData) : [] 
         var lx = evt.nativeEvent.locationX
         var ly = evt.nativeEvent.locationY
+        console.log(lx,ly)
 
         let newData = {
             X: lx,
             Y: ly,
-            text : (ItemData&&ItemData.text)? ItemData.text :""
+            text : (ItemData&&ItemData.text)? ItemData.text : ""
         }
 
         console.log(ItemData,JSON.stringify(newData))
-        await  AsyncStorage.setItem(this.props.idx, JSON.stringify(newData))*/
+        await  AsyncStorage.setItem(this.props.idx, JSON.stringify(newData))
         /*
         console.log('on drag',this.props.idx,evt.nativeEvent.locationX)
         var lx = evt.nativeEvent.locationX
