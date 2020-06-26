@@ -40,7 +40,8 @@ export function ConnectMindmapItem(state = initMindMapState, action) {
 }
 
 const initMindMapInfo = {
-    mindmapItemNum:0
+    mindmapItemNum:0,
+    data:[]
 };
 
 export function MindmapInfo(state = initMindMapInfo, action) {
@@ -49,7 +50,8 @@ export function MindmapInfo(state = initMindMapInfo, action) {
             return {
                 ...state,
                 mindmapItemNum: state.mindmapItemNum+1,    
-            }     
+            }  
+           
         default:
             return state;
     }

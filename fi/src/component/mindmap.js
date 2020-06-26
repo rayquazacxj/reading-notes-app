@@ -31,11 +31,11 @@ class Mindmap extends React.Component {
     render() {
         const {selectedKey1,mindmapItemNum} = this.props;
         console.log(selectedKey1,mindmapItemNum)
-
+        var i=0
         let added_buttons_goes_here =  []
-        for(let i=0; i<mindmapItemNum ; i++){
+        for(i=0; i<mindmapItemNum ; i++){
             added_buttons_goes_here.push(
-                <MindmapItem  key={i}></MindmapItem>
+                <MindmapItem  idx={`MindmapItem${i}`}></MindmapItem>
             )
         }
         
@@ -90,14 +90,7 @@ class Mindmap extends React.Component {
     */
     
     
-    /*
-    handlePress(){
-        alert('handlePress!')
-        return(
-            <Text>HII</Text>
-            <MindmapItem onPress={this.handlePress} />
-        )
-    }*/
+    
 }
 
 const styles = StyleSheet.create({

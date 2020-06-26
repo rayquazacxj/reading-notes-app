@@ -9,10 +9,10 @@ import {
   } from 'react-native'
 import Draggable from 'react-native-draggable'
 import { Button} from 'native-base';
-import {connect} from 'react-redux';
 import {set_connect_candidate, update_connectSet} from '../state/mindmap-action'
+import AsyncStorage from '@react-native-community/async-storage';
 
-class MindmapItem extends React.Component {
+export default class MindmapItem extends React.Component {
     constructor(props) {
         super(props)
         console.log(this.props)
@@ -26,7 +26,7 @@ class MindmapItem extends React.Component {
         
     }
     render() {
-        console.log(this.props.mindmapItemNum)
+        //console.log(this.props.mindmapItemNum)
 
         return(
     
@@ -37,7 +37,7 @@ class MindmapItem extends React.Component {
                             placeholder="Type  here"
                             onChangeText={this.handleEdit}
                         />
-                        <Text> Hello {this.state.text} {this.state.id} </Text>
+                        <Text> Hello {this.state.text} {this.state.id} parent:{this.props.idx}</Text>
                         <TouchableOpacity style={{padding:10},styles.button} onPressIn={this.handleSetConnect} onPress={(evt)=>{ this.setState({disabled: false }); console.log('no press',this.state.disabled,evt.nativeEvent.locationX)}} />
                             
                         
@@ -47,24 +47,24 @@ class MindmapItem extends React.Component {
         )
     }
 
-    componentDidMount() {
+    componentDidMount() {/*
         this.setState({  
             id:this.props.mindmapItemNum
         })
-        console.log('componentDidMount: ',this.state.id)
+        console.log('componentDidMount: ',this.state.id)*/
     }
 
     handleSetConnect(){
         this.setState({  
             disabled:true
         })
-        this.props.dispatch(set_connect_candidate(this.state.id));
+        this.props.dispatch(set_connect_candidate(0));
 
         if(this.props.selectNum>0){
             this.props.dispatch(update_connectSet());
         }
 
-        console.log('selectedKey1: ',this.props.selectedKey1)
+        //console.log('selectedKey1: ',this.props.selectedKey1)
     }
 
     getRandomInt(max,min) {
@@ -78,6 +78,16 @@ class MindmapItem extends React.Component {
         this.setState({
             text: typedText
         });
+        /*
+        const storeData = async (value) => {
+            try {
+                const ItemData = await AsyncStorage.getItem('@storage_Key')
+                let ItemData = ItemData ? JSON.parse(ItemData) : [];
+                await AsyncStorage.setItem('@storage_Key', value)
+            } catch (e) {
+              // saving error
+            }
+          }*/
     };
 
     
@@ -104,9 +114,9 @@ const styles = StyleSheet.create({
 
     
 });
-
+/*
 export default connect(state => ({
     ...state.ConnectMindmapItem,
     mindmapItemNum: state.MindmapInfo.mindmapItemNum
     
-}))(MindmapItem);
+}))(MindmapItem);*/
