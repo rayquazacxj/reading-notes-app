@@ -168,16 +168,16 @@ class MindmapItem extends React.Component {
 const styles = StyleSheet.create({
     buttont: {
         marginBottom: 30,
-        width: 200,
-        height:150,
+        width: 150,
+        height:100,
         borderRadius:100,
         alignItems: 'center',
         backgroundColor: 'yellow'
       },
     button: {
         marginBottom: 10,
-        width: 100,
-        height:55,
+        width: 50,
+        height:25,
         borderRadius:10,
         alignItems: 'center',
         backgroundColor: 'green'
