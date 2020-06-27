@@ -31,10 +31,12 @@ class Mindmap extends React.Component {
         super(props);
         this.state = {
             connect_positions:[],
+            itemTexts:[]
             //connect_lines:[]
         }
         this.handleAddButton = this.handleAddButton.bind(this)
         this.get_connectLines = this.get_connectLines.bind(this)
+        this.handleShow = this.handleShow.bind(this)
     }
 
     render() {
@@ -44,7 +46,7 @@ class Mindmap extends React.Component {
         let added_buttons_goes_here =  []
         for(i=0; i<mindmapItemNum ; i++){
             added_buttons_goes_here.push(
-                <MindmapItem  key={i} idx={`MindmapItem${i}`} id={i}></MindmapItem>
+                <MindmapItem  key={i} idx={`MindmapItem${i}`} id={i} text={this.state.itemTexts[i]}></MindmapItem>
             )
         }
 
@@ -74,6 +76,9 @@ class Mindmap extends React.Component {
                 
 
                     <View>
+                        <Button title="show" onPress={this.handleShow} >
+                            <Text style={{color:'white'}}>      show</Text>
+                        </Button>
                         <Button title="Add more" onPress={this.handleAddButton} >
                             <Text style={{color:'white'}}>      Add more</Text>
                         </Button>
@@ -101,6 +106,22 @@ class Mindmap extends React.Component {
     }
     handleAddButton() {
         this.props.dispatch(update_mindmapItemNum());      
+    }
+    async handleShow(){
+        var itemText = []
+        for(let i=0;i<this.props.mindmapItemNum;i++){
+            let item = await AsyncStorage.getItem(`MindmapItem${i}`)
+            console.log('connectItem1: ',item )
+            item = JSON.parse(item);
+            itemText.push(   item.text  )
+
+            
+        }
+
+        console.log('itemText: ',itemText)
+        this.setState({
+            itemTexts: itemText,
+        });
     }
 
     componentDidMount(){

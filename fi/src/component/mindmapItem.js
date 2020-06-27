@@ -40,7 +40,7 @@ class MindmapItem extends React.Component {
                             placeholder="Type  here"
                             onChangeText={this.handleEdit}
                         />
-                        <Text> Hello {this.state.text} {this.state.id} parent:{this.props.idx}</Text>
+                        <Text> Hello {this.state.text} {this.state.id} parent:{this.props.idx} text:{this.props.text}</Text>
                         <TouchableOpacity style={{padding:10},styles.button} onPressIn={this.handleSetConnect} onPress={(evt)=>{ this.setState({disabled: false }); console.log('no press',this.state.disabled,evt.nativeEvent.locationX)}} />
                             
                         
