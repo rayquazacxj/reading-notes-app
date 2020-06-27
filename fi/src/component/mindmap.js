@@ -36,7 +36,7 @@ class Mindmap extends React.Component {
         }
         this.handleAddButton = this.handleAddButton.bind(this)
         this.get_connectLines = this.get_connectLines.bind(this)
-        this.handleShow = this.handleShow.bind(this)
+        
     }
 
     render() {
@@ -101,30 +101,10 @@ class Mindmap extends React.Component {
     handleAddButton() {
         this.props.dispatch(update_mindmapItemNum());      
     }
-    async handleShow(){
-        <Button title="show" onPress={this.handleShow} >
-                            <Text style={{color:'white'}}>      show</Text>
-                        </Button>
-        /*
-        var itemText = []
-        for(let i=0;i<this.props.mindmapItemNum;i++){
-            let item = await AsyncStorage.getItem(`MindmapItem${i}`)
-            console.log('connectItem1: ',item )
-            item = JSON.parse(item);
-            itemText.push(   item.text  )
-
-            
-        }
-
-        console.log('itemText: ',itemText)
-        this.setState({
-            itemTexts: itemText,
-        });*/
-    }
+    
 
     componentDidMount(){
         console.log('hi mindmap!')
-        this.handleShow()
         this.get_connectLines()
         console.log('hi mindmap hi!')
        
