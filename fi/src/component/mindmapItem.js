@@ -21,11 +21,14 @@ class MindmapItem extends React.Component {
         this.state = {
             id:null,
             text:"",
-            disabled: false
+            disabled: false,
+            X:50,
+            Y:100
         }
         this.handleEdit = this.handleEdit.bind(this)
         this.handleSetConnect = this.handleSetConnect.bind(this)
         this.handleDragRelease = this.handleDragRelease.bind(this)
+        this.handleInfo = this.handleInfo.bind(this)
         
     }
     render() {
@@ -33,14 +36,14 @@ class MindmapItem extends React.Component {
 
         return(
     
-            <Draggable x={50} y={100} disabled={this.state.disabled} onDragRelease={(evt)=>this.handleDragRelease(evt)}>
+            <Draggable x={this.state.X} y={this.state.Y} disabled={this.state.disabled} onDragRelease={(evt)=>this.handleDragRelease(evt)}>
                 <TouchableHighlight onPressIn={()=>this.setState({disabled: false })} underlayColor="green">
                     <View style={{padding:10},styles.buttont}>
                         <TextInput
                             placeholder="Type  here"
                             onChangeText={this.handleEdit}
                         />
-                        <Text> Hello {this.state.text} {this.state.id} parent:{this.props.idx} text:{this.props.text}</Text>
+                        <Text> Hello {this.state.text} {this.state.id} parent:{this.props.idx} text:{this.props.text || this.state.text}</Text>
                         <TouchableOpacity style={{padding:10},styles.button} onPressIn={this.handleSetConnect} onPress={(evt)=>{ this.setState({disabled: false }); console.log('no press',this.state.disabled,evt.nativeEvent.locationX)}} />
                             
                         
@@ -50,12 +53,10 @@ class MindmapItem extends React.Component {
         )
     }
 
-    componentDidMount() {/*
-        this.setState({  
-            id:this.props.mindmapItemNum
-        })
-        console.log('componentDidMount: ',this.state.id)*/
-        
+    componentDidMount() {
+        console.log('hi mindmapItem')
+        this.handleInfo()
+        console.log('hi mindmapItem hi')
     }
 
     handleSetConnect(){
@@ -72,8 +73,16 @@ class MindmapItem extends React.Component {
         //console.log('selectedKey1: ',this.props.selectedKey1)
     }
 
-    getRandomInt(max,min) {
-        return Math.floor(Math.random() * Math.floor(max-min));
+    async handleInfo(){
+            let itemInfo = await AsyncStorage.getItem(this.props.idx)
+            console.log('itemInfo(in mindmapItem): ',itemInfo )
+            itemInfo = JSON.parse(itemInfo)
+            this.setState({
+                text: itemInfo.text,
+                X: itemInfo.X,
+                Y: itemInfo.Y
+            });
+            
     }
 
     async handleDragRelease(evt){
@@ -168,16 +177,16 @@ class MindmapItem extends React.Component {
 const styles = StyleSheet.create({
     buttont: {
         marginBottom: 30,
-        width: 150,
-        height:100,
+        width: 200,
+        height:150,
         borderRadius:100,
         alignItems: 'center',
         backgroundColor: 'yellow'
       },
     button: {
         marginBottom: 10,
-        width: 50,
-        height:25,
+        width: 100,
+        height:50,
         borderRadius:10,
         alignItems: 'center',
         backgroundColor: 'green'

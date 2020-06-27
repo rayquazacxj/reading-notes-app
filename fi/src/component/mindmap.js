@@ -55,7 +55,7 @@ class Mindmap extends React.Component {
         for(let i=0; i<this.state.connect_positions.length ; i++){
             connect_lines.push(
                 //<Text key={i}>LINE{i} </Text>
-                <Line x1={(this.state.connect_positions[i][2]).toString()} y1={(this.state.connect_positions[i][3]).toString()} x2={(this.state.connect_positions[i][0]).toString()} y2={(this.state.connect_positions[i][1]).toString() } stroke="green" strokeWidth="2" /> 
+                <Line key={i} x1={(this.state.connect_positions[i][2]).toString()} y1={(this.state.connect_positions[i][3]).toString()} x2={(this.state.connect_positions[i][0]).toString()} y2={(this.state.connect_positions[i][1]).toString() } stroke="green" strokeWidth="2" /> 
                 //<Svg key={i} height="100" width="100">
                     //<Line x1={this.state.connect_positions[i][2]} y1={this.state.connect_positions[i][3]} x2={this.state.connect_positions[i][0]} y2={this.state.connect_positions[i][1] } stroke="green" strokeWidth="2" /> 
                 //</Svg>
@@ -76,9 +76,7 @@ class Mindmap extends React.Component {
                 
 
                     <View>
-                        <Button title="show" onPress={this.handleShow} >
-                            <Text style={{color:'white'}}>      show</Text>
-                        </Button>
+                        
                         <Button title="Add more" onPress={this.handleAddButton} >
                             <Text style={{color:'white'}}>      Add more</Text>
                         </Button>
@@ -108,6 +106,10 @@ class Mindmap extends React.Component {
         this.props.dispatch(update_mindmapItemNum());      
     }
     async handleShow(){
+        <Button title="show" onPress={this.handleShow} >
+                            <Text style={{color:'white'}}>      show</Text>
+                        </Button>
+        /*
         var itemText = []
         for(let i=0;i<this.props.mindmapItemNum;i++){
             let item = await AsyncStorage.getItem(`MindmapItem${i}`)
@@ -121,30 +123,20 @@ class Mindmap extends React.Component {
         console.log('itemText: ',itemText)
         this.setState({
             itemTexts: itemText,
-        });
+        });*/
     }
 
     componentDidMount(){
-       /*
-        <Line x1="0" y1="0" x2="100" y2="100" stroke="red" strokeWidth="2" />
-                             <Line x1={(50).toString()} y1={(50).toString()} x2={(150).toString()} y2={(150).toString()} stroke="green" strokeWidth="2" />
-        if(this.props.connectSet.length){
-            this.get_connectLines().then( data => {
-                let connect_lines_ = []
-                for(let i=0; i<this.props.connectSet.length ; i++){
-                    connect_lines_.push(
-                        <Line x1={this.state.connect_positions[i][0]} y1={this.state.connect_positions[i][1]} x2={this.state.connect_positions[i][2]} y2={this.state.connect_positions[i][3] } stroke="green" strokeWidth="2" /> 
-                    )
-                } 
-                this.setState({
-                    connect_lines: connect_lines_,
-                });
-
-            })
-        } */
+        console.log('hi mindmap!')
+        this.handleShow()
+        this.get_connectLines()
+        console.log('hi mindmap hi!')
+       
     }
-    componentDidUpdate(){
-
+    componentDidUpdate(){/*
+        console.log('hi mindmap - get_connectLines 1!')
+        this.get_connectLines()
+        console.log('hi mindmap - get_connectLines 2!')*/
         /*
             this.get_connectLines().then( data => {
                 let connect_lines_ = []
