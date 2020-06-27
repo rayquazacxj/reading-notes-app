@@ -65,7 +65,7 @@ class MindmapItem extends React.Component {
        
         this.props.dispatch(set_connect_candidate(this.props.id));
 
-        if(this.props.selectNum>1 && this.props.selectedKey1!=null && this.props.selectedKey2!=null){
+        if(this.props.selectNum>0 && this.props.selectedKey1!=null && this.props.selectedKey2!=null){
             this.props.dispatch(update_connectSet());
         }
 
@@ -92,31 +92,7 @@ class MindmapItem extends React.Component {
 
         console.log('ori_data: ',ItemData,'new_data: ',JSON.stringify(newData))
         await  AsyncStorage.setItem(this.props.idx, JSON.stringify(newData))
-        /*
-        console.log('on drag',this.props.idx,evt.nativeEvent.locationX)
-        var lx = evt.nativeEvent.locationX
-        var ly =evt.nativeEvent.locationY
-
-        let ItemData = await AsyncStorage.getItem(this.props.idx)
-        ItemData = ItemData ? JSON.parse(ItemData) : []
-        console.log(result,ItemData)
-        ItemData.X = lx
-        ItemData.Y = ly
-        console.log(ItemData)
-        await AsyncStorage.setItem(this.props.idx, ItemData)
-*/
-        /*
-        AsyncStorage.getItem(this.props.idx).then((result,err) => {
-            var ItemData = result ? JSON.parse(result) : []
-            console.log(result,ItemData)
-            ItemData.X = lx
-            ItemData.Y = ly
-            console.log(ItemData)
-            AsyncStorage.setItem(this.props.idx, JSON.stringify(ItemData),err=>{
-                if(err)console.log('catch err')
-            })
-            console.log('async edited')
-        })*/
+        
 
     }
     
