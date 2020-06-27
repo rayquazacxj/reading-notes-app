@@ -81,7 +81,7 @@ class Mindmap extends React.Component {
                             <Text style={{color:'white'}}>      connect</Text>
                         </Button>
                         {added_buttons_goes_here}
-                        <Svg  height="300" width="450">
+                        <Svg  height="400" width="450" viewBox="20 20 650 650">
                         
                             {connect_lines}
                         
