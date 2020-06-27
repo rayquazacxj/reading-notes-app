@@ -39,7 +39,7 @@ import {ConnectMindmapItem , MindmapInfo} from './src/state/mindmap_reducer'
 
 import Timelinee from './src/component/timeline'
 import Mindmap from './src/component/mindmap'
-import PictureGen from './src/component/pictureGen'
+import PictureGen from './src/component/pictureGen2'
 
 const Stack = createStackNavigator();
 
@@ -86,10 +86,10 @@ export default class App extends React.Component {
           <NavigationContainer style={styles.flex}>
             <Provider store={store}>
               <Root>
-                <Stack.Navigator initialRouteName="PictureGen">
+                <Stack.Navigator initialRouteName="PictureGen2">
                     <Stack.Screen name="Timelinee" component={Timelinee} />
                     <Stack.Screen name="Mindmap" component={Mindmap} />
-                    <Stack.Screen name="PictureGen" component={PictureGen} />
+                    <Stack.Screen name="PictureGen2" component={PictureGen} />
                 </Stack.Navigator>
               </Root>
             </Provider>
