@@ -53,10 +53,10 @@ class Mindmap extends React.Component {
         for(let i=0; i<this.state.connect_positions.length ; i++){
             connect_lines.push(
                 //<Text key={i}>LINE{i} </Text>
-                /*
-                <Svg key={i} height="100" width="100">
-                    <Line x1={this.state.connect_positions[i][0]} y1={this.state.connect_positions[i][1]} x2={this.state.connect_positions[i][2]} y2={this.state.connect_positions[i][3] } stroke="green" strokeWidth="2" /> 
-                </Svg>*/
+                <Line x1={(this.state.connect_positions[i][2]).toString()} y1={(this.state.connect_positions[i][3]).toString()} x2={(this.state.connect_positions[i][0]).toString()} y2={(this.state.connect_positions[i][1]).toString() } stroke="green" strokeWidth="2" /> 
+                //<Svg key={i} height="100" width="100">
+                    //<Line x1={this.state.connect_positions[i][2]} y1={this.state.connect_positions[i][3]} x2={this.state.connect_positions[i][0]} y2={this.state.connect_positions[i][1] } stroke="green" strokeWidth="2" /> 
+                //</Svg>
             )
         }    
         console.log('connect_lines(in render): ',connect_lines)
@@ -80,15 +80,16 @@ class Mindmap extends React.Component {
                         <Button title="connect" onPress={this.get_connectLines} >
                             <Text style={{color:'white'}}>      connect</Text>
                         </Button>
-
+                        {added_buttons_goes_here}
+                        <Svg  height="300" width="450">
                         
                             {connect_lines}
                         
-                        {added_buttons_goes_here}
-
-                        <Svg  height="200" width="200">
                             
-                             <Line x1={(this.state.connect_positions.length*10).toString()} y1={(this.state.connect_positions.length*50).toString()} x2={(this.state.connect_positions.length*150).toString()} y2={(this.state.connect_positions.length*150).toString()} stroke="yellow" strokeWidth="2" />
+
+                        
+                            
+                             
                         </Svg>
                     </View>
 

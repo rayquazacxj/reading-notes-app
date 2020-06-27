@@ -80,8 +80,8 @@ class MindmapItem extends React.Component {
         evt.persist();
         let ItemData = await AsyncStorage.getItem(this.props.idx)
         ItemData = ItemData ? JSON.parse(ItemData) : [] 
-        var lx = evt.nativeEvent.locationX
-        var ly = evt.nativeEvent.locationY
+        var lx = evt.nativeEvent.pageX
+        var ly = evt.nativeEvent.pageY
         console.log(lx,ly)
 
         let newData = {
