@@ -86,7 +86,7 @@ export default class App extends React.Component {
           <NavigationContainer style={styles.flex}>
             <Provider store={store}>
               <Root>
-                <Stack.Navigator initialRouteName="PictureGen2">
+                <Stack.Navigator initialRouteName="Timelinee">
                     <Stack.Screen name="Timelinee" component={Timelinee} />
                     <Stack.Screen name="Mindmap" component={Mindmap} />
                     <Stack.Screen name="PictureGen2" component={PictureGen} />
@@ -94,8 +94,37 @@ export default class App extends React.Component {
               </Root>
             </Provider>
             
+            <Footer>
+              <FooterTab>
+                <Button vertical>
+                  <Icon name="apps" />
+                  <Text>Apps</Text>
+                </Button>
+                <Button vertical>
+                  <Icon name="camera" />
+                  <Text>Camera</Text>
+                </Button>
+                <Button vertical active>
+                  <Icon active name="navigate" />
+                  <Text>Navigate</Text>
+                </Button>
+                <Button vertical>
+                  <Icon name="person" />
+                  <Text>Contact</Text>
+                </Button>
+              </FooterTab>
+            </Footer>
 
-            <Fab
+            
+          
+
+          </NavigationContainer>
+      );
+  }
+}
+
+/*
+<Fab
               active={this.state.active}
               direction="up"
               containerStyle={{ }}
@@ -135,14 +164,7 @@ export default class App extends React.Component {
                   <Text>Contact</Text>
                 </Button>
               </FooterTab>
-            </Footer>
-          
-
-          </NavigationContainer>
-      );
-  }
-}
-
+            </Footer>*/
 
 
 const styles = StyleSheet.create({

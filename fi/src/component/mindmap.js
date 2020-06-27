@@ -80,7 +80,7 @@ class Mindmap extends React.Component {
                             </Button>
                         </View>
                         {added_buttons_goes_here}
-                        <Svg  height="640" width="410" viewBox="-20 50 400 500">
+                        <Svg  height="640" width="410" viewBox="-50 50 400 500">
                         
                             {connect_lines}
                         
