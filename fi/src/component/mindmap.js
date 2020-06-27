@@ -68,23 +68,19 @@ class Mindmap extends React.Component {
         
         return(
             <Container >
-                <Text> SCREEN2~! </Text>
-                <Item rounded >
-                    <Input placeholder="SCREEN2" />
-                </Item> 
-                   
                 
 
                     <View>
-                        
-                        <Button title="Add more" onPress={this.handleAddButton} >
-                            <Text style={{color:'white'}}>      Add more</Text>
-                        </Button>
-                        <Button title="connect" onPress={this.get_connectLines} >
-                            <Text style={{color:'white'}}>      connect</Text>
-                        </Button>
+                        <View style={{flexDirection:'row'}}>
+                            <Button title="Add more" onPress={this.handleAddButton} style={{flex:1}} >
+                                <Text style={{color:'white'}}>         Add more</Text>
+                            </Button>
+                            <Button title="connect" onPress={this.get_connectLines} style={{flex:1}} >
+                                <Text style={{color:'white'}}>         connect</Text>
+                            </Button>
+                        </View>
                         {added_buttons_goes_here}
-                        <Svg  height="400" width="450" viewBox="-20 100 600 600">
+                        <Svg  height="640" width="410" viewBox="-20 50 400 500">
                         
                             {connect_lines}
                         

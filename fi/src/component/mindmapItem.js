@@ -22,8 +22,8 @@ class MindmapItem extends React.Component {
             id:null,
             text:"",
             disabled: false,
-            X:50,
-            Y:100
+            X:50,  // for init position
+            Y:100  // for init position
         }
         this.handleEdit = this.handleEdit.bind(this)
         this.handleSetConnect = this.handleSetConnect.bind(this)
@@ -43,7 +43,7 @@ class MindmapItem extends React.Component {
                             placeholder="Type  here"
                             onChangeText={this.handleEdit}
                         />
-                        <Text> Hello {this.state.text} {this.state.id} parent:{this.props.idx} text:{this.props.text || this.state.text}</Text>
+                        <Text> Hello {this.state.text}  </Text>
                         <TouchableOpacity style={{padding:10},styles.button} onPressIn={this.handleSetConnect} onPress={(evt)=>{ this.setState({disabled: false }); console.log('no press',this.state.disabled,evt.nativeEvent.locationX)}} />
                             
                         
@@ -79,9 +79,10 @@ class MindmapItem extends React.Component {
             itemInfo = JSON.parse(itemInfo)
             this.setState({
                 text: itemInfo.text,
-                X: itemInfo.X,
-                Y: itemInfo.Y
+                X: itemInfo.X,//-100,  
+                Y: itemInfo.Y//-120
             });
+            console.log('itemInfo: ',this.state.X,this.state.Y,this.props.idx)
             
     }
 
@@ -89,8 +90,8 @@ class MindmapItem extends React.Component {
         evt.persist();
         let ItemData = await AsyncStorage.getItem(this.props.idx)
         ItemData = ItemData ? JSON.parse(ItemData) : [] 
-        var lx = evt.nativeEvent.pageX
-        var ly = evt.nativeEvent.pageY
+        var lx = evt.nativeEvent.pageX-100//evt.nativeEvent.locationX// offset
+        var ly = evt.nativeEvent.pageY-120//evt.nativeEvent.locationY// offset
         console.log(lx,ly)
 
         let newData = {
