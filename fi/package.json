@@ -32,12 +32,14 @@
     "react-native-timeline-flatlist": "^0.7.2",
     "react-native-timeline-listview": "^0.2.3",
     "react-native-vector-icons": "^6.6.0",
+    "react-native-view-shot": "^3.1.2",
     "react-native-zss-rich-text-editor": "^1.1.0",
     "react-navigation": "^4.3.9",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "@react-native-community/cameraroll":"^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

@@ -86,7 +86,7 @@ export default class App extends React.Component {
           <NavigationContainer style={styles.flex}>
             <Provider store={store}>
               <Root>
-                <Stack.Navigator initialRouteName="Timelinee">
+                <Stack.Navigator initialRouteName="PictureGen2">
                     <Stack.Screen name="Timelinee" component={Timelinee} />
                     <Stack.Screen name="Mindmap" component={Mindmap} />
                     <Stack.Screen name="PictureGen2" component={PictureGen} />

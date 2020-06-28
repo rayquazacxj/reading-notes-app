@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{ useRef } from 'react'
 import {
     View,
     StyleSheet,
@@ -13,13 +13,17 @@ import {
 
 import { Container, Item, Input ,Text, Button} from 'native-base';
 import Draggable from 'react-native-draggable'
-import { color } from 'react-native-reanimated';
 import {GoToButton} from '../api/navigation';
+import { ViewShot,captureRef } from "react-native-view-shot";
 
 
   export default class PictureGen extends React.Component {
     constructor(props) {
         super(props);
+
+        this.ref = React.createRef();
+
+
         this.state = {
           selectedPic:require('../picture/PIC3.png') ,
           text: '',
@@ -28,24 +32,35 @@ import {GoToButton} from '../api/navigation';
             fontFamily:'vincHand'
           },
           editor_invisible:false,
-          pictureSelector_invisible:false
+          pictureSelector_invisible:false,
+          res:null
 
       }
+      
         
         this.handleSelectPic = this.handleSelectPic.bind(this)
+        this.handleViewShot = this.handleViewShot.bind(this)
     }
 
     render() {
         console.log('this.state.selectedPic: ',this.state.selectedPic)
         console.log('this.state.stlye: ',this.state.style)
+        //console.log('hi myRef: ',this.myRef)
 
         var style_invisible =  false 
         //<Image source={require(this.state.selectedPic) }  style={{width:410,height:600}}></Image>
         return(
             <Container>
+                
+                <View style={{flexDirection:'row'}}>
+                    <Button  small success onPress={()=> this.setState({editor_invisible:!this.state.editor_invisible})} ><Text>  invisible </Text></Button>
+                    <Button  small success onPress={()=> this.setState({pictureSelector_invisible:!this.state.pictureSelector_invisible})} ><Text>  PICinvisible </Text></Button>
+                    <Button  small success onPress={() => this.handleViewShot()} ><Text>  ViewShot </Text></Button>
+                    
+                    <GoToButton screenName="Mindmap" />
+                </View>
 
-                  
-
+                <View collapsable={false} ref={this.ref} > 
                   
                   <ImageBackground source={this.state.selectedPic }  style={{width:411,height:650}}>
                     <View style={{opacity: this.state.editor_invisible? 0:100}}>
@@ -64,34 +79,33 @@ import {GoToButton} from '../api/navigation';
                             <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontFamily:'pirulen'}})} ><Text>  fontA </Text></Button>
                             <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontFamily:'vincHand'}})} ><Text>  fontB </Text></Button>
                         </View>
+                        
                     </View>
-                    <View style={{flexDirection:'row'}}>
-                        <Button  small success onPress={()=> this.setState({editor_invisible:!this.state.editor_invisible})} ><Text>  invisible </Text></Button>
-                        <Button  small success onPress={()=> this.setState({pictureSelector_invisible:!this.state.pictureSelector_invisible})} ><Text>  PICinvisible </Text></Button>
-                        <GoToButton screenName="Mindmap" />
-                    </View>
+                    
+                    
                     <Draggable x={100} y={200}>
                         <Text style={this.state.style}>
                             {this.state.description}
                         </Text>  
                     </Draggable>
 
-                        <View style={{marginTop:340,flexDirection:'row',opacity: this.state.pictureSelector_invisible? 0:100}}>
-                            <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../picture/PIC1.png'))} underlayColor="green">
-                                <Image source={require('../picture/PIC1.png') }  style={{width:150,height:150}}></Image>
-                            </TouchableHighlight>
+                    <View style={{marginTop:340,flexDirection:'row',opacity: this.state.pictureSelector_invisible? 0:100}}>
+                        <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../picture/PIC1.png'))} underlayColor="green">
+                            <Image source={require('../picture/PIC1.png') }  style={{width:150,height:150}}></Image>
+                        </TouchableHighlight>
 
-                            <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../picture/PIC2.png'))} underlayColor="green">
-                                <Image source={require('../picture/PIC2.png') }  style={{width:150,height:150}}></Image>
-                            </TouchableHighlight>
+                        <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../picture/PIC2.png'))} underlayColor="green">
+                            <Image source={require('../picture/PIC2.png') }  style={{width:150,height:150}}></Image>
+                        </TouchableHighlight>
 
-                            <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../picture/PIC3.png'))} underlayColor="green">
-                                <Image source={require('../picture/PIC3.png') }  style={{width:150,height:150}}></Image>
-                            </TouchableHighlight>
-                        </View>
+                        <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../picture/PIC3.png'))} underlayColor="green">
+                            <Image source={require('../picture/PIC3.png') }  style={{width:150,height:150}}></Image>
+                        </TouchableHighlight>
+                    </View>
 
-                        </ImageBackground>
-                    </Container> 
+                 </ImageBackground>
+                </View>
+            </Container> 
                                           
             
         )
@@ -104,6 +118,28 @@ import {GoToButton} from '../api/navigation';
       });
     }
 
+    handleViewShot(){
+        console.log('hi this.ref: ',this.ref)
+
+        captureRef(this.ref,{
+            format: "jpg",
+            quality: 0.8
+        }).then(res => {
+            this.setState({ res});
+
+            console.log('res:',res)
+
+            //CameraRoll.saveToCameraRoll(res).then(Alert.alert('Success', 'Photo added to camera roll!'))
+            
+        })
+
+       
+
+    }
+
+   
+    
+    
     onStyleKeyPress = (toolType) => {
         this.editor.applyToolbar(toolType);
     }
