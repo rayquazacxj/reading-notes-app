@@ -16,6 +16,7 @@ import Draggable from 'react-native-draggable'
 import {GoToButton} from '../api/navigation';
 import { ViewShot,captureRef } from "react-native-view-shot";
 import CameraRoll from "@react-native-community/cameraroll";
+import AsyncStorage from '@react-native-community/async-storage';
 
 
   export default class PictureGen extends React.Component {
@@ -30,7 +31,7 @@ import CameraRoll from "@react-native-community/cameraroll";
           text: '',
           style:{
             fontSize:30,
-            fontFamily:'vincHand'
+            
           },
           editor_invisible:false,
           pictureSelector_invisible:false,
@@ -56,7 +57,7 @@ import CameraRoll from "@react-native-community/cameraroll";
                 <View style={{flexDirection:'row'}}>
                     <Button  small success onPress={()=> this.setState({editor_invisible:!this.state.editor_invisible})} ><Text>  invisible </Text></Button>
                     <Button  small success onPress={()=> this.setState({pictureSelector_invisible:!this.state.pictureSelector_invisible})} ><Text>  PICinvisible </Text></Button>
-                    <Button  small success onPress={() => this.handleViewShot()} ><Text>  ViewShot </Text></Button>
+                    
                     
                     <GoToButton screenName="Mindmap" />
                 </View>
@@ -69,19 +70,16 @@ import CameraRoll from "@react-native-community/cameraroll";
                             <Input style={this.state.style} placeholder="type here"  onChangeText={(text)=>this.setState({description: text})}/>
                         </Item>
 
+                        
                         <View style={{flexDirection:'row'}}>
-                            <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontWeight: 'bold',fontSize: 40}})} ><Text>  bold </Text></Button>
-                            <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontStyle: 'italic'}})} ><Text>  italic </Text></Button>
-                            <Button  small success onPress={()=>this.setState({style:{...this.state.style,textDecorationLine: 'underline'}})} ><Text>  underline </Text></Button>
-                            <Button  small success onPress={()=>this.setState({style:{...this.state.style,textDecorationLine: 'line-through'}})} ><Text>  line-through </Text></Button>
-                            
-                        </View>
-                        <View style={{flexDirection:'row'}}>
-                            <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontFamily:'pirulen'}})} ><Text>  fontA </Text></Button>
+                        <Button  small success onPress={()=>this.setState({style:{...this.state.style,color:'green'}})} ><Text>  color </Text></Button>
+                            <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontSize:50}})} ><Text>  FONTSIZE </Text></Button>
+                            <Button  small success onPress={()=>this.setState({style:{fontFamily:'pirulen',...this.state.style}})} ><Text>  fontA </Text></Button>
                             <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontFamily:'vincHand'}})} ><Text>  fontB </Text></Button>
                         </View>
                         
                     </View>
+                    
                     
                     
                     <Draggable x={100} y={200}>
@@ -113,12 +111,21 @@ import CameraRoll from "@react-native-community/cameraroll";
         
     }
     
+    /*
+    <View style={{flexDirection:'row'}}>
+        <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontWeight: 'bold',fontSize: 40}})} ><Text>  bold </Text></Button>
+        <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontStyle: 'italic'}})} ><Text>  italic </Text></Button>
+        <Button  small success onPress={()=>this.setState({style:{...this.state.style,textDecorationLine: 'underline'}})} ><Text>  underline </Text></Button>
+        <Button  small success onPress={()=>this.setState({style:{...this.state.style,textDecorationLine: 'line-through'}})} ><Text>  line-through </Text></Button>
+        
+    </View>
+                        */
     handleSelectPic(pic){
       this.setState({
           selectedPic: pic 
       });
     }
-
+/*
     async  hasAndroidPermission() {
         const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
       
@@ -131,18 +138,23 @@ import CameraRoll from "@react-native-community/cameraroll";
         console.log('status: ',status)
         return status === 'granted';
       }
+
+      
       
 
       async  savePicture(res) {
         console.log('savePicture')
-/*
+        await this.hasAndroidPermission();
+
         if (!(await this.hasAndroidPermission())) {
             console.log('doesnt has AndroidPermission')
           return;
-        }*/
+        }
       
         CameraRoll.saveToCameraRoll(res).then(console.log('saveToCameraRoll', 'Photo added to camera roll!'));
-      };
+      };*/
+
+      
 
     handleViewShot(){
         console.log('hi this.ref: ',this.ref)
@@ -156,6 +168,7 @@ import CameraRoll from "@react-native-community/cameraroll";
             console.log('res:',res)
 
             this.savePicture(res)
+
             //CameraRoll.saveToCameraRoll(res).then(console.log('Success', 'Photo added to camera roll!'))
             
         })
@@ -167,28 +180,7 @@ import CameraRoll from "@react-native-community/cameraroll";
    
     
     
-    onStyleKeyPress = (toolType) => {
-        this.editor.applyToolbar(toolType);
-    }
-
-    onSelectedTagChanged = (tag) => {
-        this.setState({
-            selectedTag: tag
-        })
-    }
-
-    onSelectedStyleChanged = (styles) => { 
-        this.setState({
-            selectedStyles: styles,
-        })
-    }
-
-    onValueChanged = (value) => {
-        this.setState({
-            value: value
-        });
-    }
-
+    
   }
 
 
@@ -204,6 +196,8 @@ import CameraRoll from "@react-native-community/cameraroll";
         backgroundColor: 'yellow',
        
       },
+      test:{fontSize: 40, fontFamily: "pirulen", fontWeight: "bold", fontStyle: "italic", textDecorationLine: "underline"}
+      
       
 
     

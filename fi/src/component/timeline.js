@@ -17,50 +17,24 @@ export default class Timelinee extends React.Component {
     
     constructor(props) {
         super(props);
-
+/*
         this.data = [
             {time: '09:00', title: 'Event 1', description: 'Event 1 Description'},
             {time: '10:45', title: 'Event 2', description: 'Event 2 Description'},
             {time: '12:00', title: 'Event 3', description: 'Event 3 Description'},
             {time: '14:00', title: 'Event 4', description: 'Event 4 Description'},
             {time: '16:30', title: 'Event 5', description: 'Event 5 Description'}
-          ]
+          ]*/
 
-        this.state = {title:'',time:'',description:"",data:this.data};
+        this.state = {title:'',time:'',description:"",data:[]};
         
           this.handleInputChange = this.handleInputChange.bind(this);
           this.handleAddData = this.handleAddData.bind(this)
+          this.handleGetDataFromStorage = this.handleGetDataFromStorage.bind(this)
         
     }
 
-    componentWillMount(){/*
-        const getData = async () => {
-            try {
-              const timelineDataSet = await AsyncStorage.getItem('timelineData')
-              var timelineData = (timelineDataSet!=null) ? JSON.parse(timelineDataSet) : null;
-              if (timelineData.length > 0) {
-                timelineData = timelineData.filter(t => {
-                        return t.boookId == 1 // temporarily set it as const
-                    });
-                }
-                return timelineData
-            } catch(e) {
-              // error reading value
-            }
-          }
-        this.setState({
-            data: getData
-        });*/
-          /*
-        const storeData = async (boookId) => {
-            try {
-              const jsonValue = JSON.stringify(value)
-              await AsyncStorage.setItem('@storage_Key', jsonValue)
-            } catch (e) {
-              // saving error
-            }
-          }*/
-        
+    componentWillMount(){
    }
 
     render() {
@@ -96,6 +70,8 @@ export default class Timelinee extends React.Component {
                         <Input placeholder="Description"  onChangeText={(text)=>this.setState({description:text})}/>
                     </Item>
                     <Button  small success onPress={this.handleAddData} ><Text>  ADD </Text></Button>
+                    <Button  small success onPress={this.handleGetDataFromStorage} ><Text>  GetDataFromStorage </Text></Button>
+                    
                 </Container>
                 
                 
@@ -103,6 +79,18 @@ export default class Timelinee extends React.Component {
         )
         
     }
+
+    async handleGetDataFromStorage(evt){
+        evt.persist();
+        let timelineData = await AsyncStorage.getItem('timelineData')//`$timelineData{this.props.idx}`
+        console.log('timelineData: ',timelineData )
+        timelineData = timelineData? JSON.parse(timelineData) : []
+        this.setState({
+          data:timelineData
+         });
+
+    }
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
@@ -114,7 +102,7 @@ export default class Timelinee extends React.Component {
         });
     }
 
-    handleAddData(){
+    async handleAddData(){
         console.log(' handleAddData','time: ',this.state.time,'title: ',this.state.title,'des: ',this.state.description)
         if(this.state.time&&this.state.title){
             console.log('handle~',this.state.data)
@@ -132,7 +120,11 @@ export default class Timelinee extends React.Component {
 
             this.setState({
                 data : dataArray
-            });/*
+            });
+
+            await  AsyncStorage.setItem('timelineData', JSON.stringify(dataArray))
+            
+            /*
             const storeData = async () => {
                 try {
                   let newData = JSON.stringify(dataArray)
