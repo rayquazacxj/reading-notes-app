@@ -6,7 +6,7 @@ import {
     TextInput,
     Image,
     ImageBackground,
-    Keyboard,
+    PermissionsAndroid,
     KeyboardAvoidingView,
     TouchableWithoutFeedback
   } from 'react-native'
@@ -15,6 +15,7 @@ import { Container, Item, Input ,Text, Button} from 'native-base';
 import Draggable from 'react-native-draggable'
 import {GoToButton} from '../api/navigation';
 import { ViewShot,captureRef } from "react-native-view-shot";
+import CameraRoll from "@react-native-community/cameraroll";
 
 
   export default class PictureGen extends React.Component {
@@ -118,6 +119,31 @@ import { ViewShot,captureRef } from "react-native-view-shot";
       });
     }
 
+    async  hasAndroidPermission() {
+        const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
+      
+        const hasPermission = await PermissionsAndroid.check(permission);
+        if (hasPermission) {
+          return true;
+        }
+      
+        const status = await PermissionsAndroid.request(permission);
+        console.log('status: ',status)
+        return status === 'granted';
+      }
+      
+
+      async  savePicture(res) {
+        console.log('savePicture')
+/*
+        if (!(await this.hasAndroidPermission())) {
+            console.log('doesnt has AndroidPermission')
+          return;
+        }*/
+      
+        CameraRoll.saveToCameraRoll(res).then(console.log('saveToCameraRoll', 'Photo added to camera roll!'));
+      };
+
     handleViewShot(){
         console.log('hi this.ref: ',this.ref)
 
@@ -129,7 +155,8 @@ import { ViewShot,captureRef } from "react-native-view-shot";
 
             console.log('res:',res)
 
-            //CameraRoll.saveToCameraRoll(res).then(Alert.alert('Success', 'Photo added to camera roll!'))
+            this.savePicture(res)
+            //CameraRoll.saveToCameraRoll(res).then(console.log('Success', 'Photo added to camera roll!'))
             
         })
 
