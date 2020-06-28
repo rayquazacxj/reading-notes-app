@@ -55,7 +55,7 @@ import CameraRoll from "@react-native-community/cameraroll";
             <Container>
                 
                 <View style={{flexDirection:'row'}}>
-                    <Button  style={styles.button} onPress={()=> this.setState({editor_invisible:!this.state.editor_invisible})} ><Text style={{color:'#397956'}}>  edit </Text></Button>
+                    <Button  style={styles.button} onPress={()=> this.setState({editor_invisible:!this.state.editor_invisible})} ><Text style={{color:'#397956'}}>         edit </Text></Button>
                     <Button  style={styles.button} onPress={()=> this.setState({pictureSelector_invisible:!this.state.pictureSelector_invisible})} ><Text style={{color:'#397956'}}>   picture </Text></Button>
                     
                     
