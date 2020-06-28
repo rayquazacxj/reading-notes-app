@@ -137,8 +137,8 @@ export default class ForthPage extends Component {
                           // }
                         }} placeholder="Add Title..." />
               
-              <Button style = {styles.button1} onPress={() =>navigate('SixthPage')}><Text>Mind Map</Text></Button>
-              <Button style = {styles.button2}><Text>Card</Text></Button>
+              <Button style = {styles.button1} onPress={() =>navigate('Mindmap')}><Text>Mind Map</Text></Button>
+              <Button style = {styles.button2} onPress={() =>navigate('Timelinee')}><Text>Timeline</Text></Button>
             </CardItem>
             <CardItem bordered>
               <Body>

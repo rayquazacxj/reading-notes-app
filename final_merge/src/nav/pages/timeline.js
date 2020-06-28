@@ -12,8 +12,9 @@ import { Container, Header, Content, Item, Input ,Text, Button} from 'native-bas
 import AsyncStorage from '@react-native-community/async-storage';
 import {GoToButton} from '../../api/navigation'  //'../api/navigation';
 import Draggable from 'react-native-draggable'
+import {connect} from 'react-redux';
 
-export default class Timelinee extends React.Component {
+class Timelinee extends React.Component {
     
     constructor(props) {
         super(props);
@@ -63,9 +64,7 @@ export default class Timelinee extends React.Component {
                 data={this.state.data}
                 innerCircle={'dot'}
                 />
-                <Draggable x={220} y={3}>
-                    <GoToButton screenName="PictureGen2" />
-                </Draggable>
+                
                 <Draggable x={320} y={40}>
                     <Button  small success onPress={()=>this.setState({editing:!this.state.editing})} ><Text>  edit </Text></Button>
                 </Draggable>
@@ -99,6 +98,10 @@ export default class Timelinee extends React.Component {
                 
             </Container>
         )
+        /*
+        <Draggable x={220} y={3}>
+            <GoToButton screenName="PictureGen2" />
+        </Draggable>*/
         
     }
 
@@ -106,8 +109,8 @@ export default class Timelinee extends React.Component {
     async handleGetDataFromStorage(evt){
        // evt.persist();
        //AsyncStorage.removeItem('timelineData')
-        let timelineData = await AsyncStorage.getItem('timelineData')//`$timelineData{this.props.idx}`
-        console.log('timelineData: ',timelineData )
+        let timelineData = await AsyncStorage.getItem(`timelineData${this.props.currentID}`)//`$timelineData{this.props.idx}`
+        console.log(`timelineData${this.props.currentID}: `,timelineData )
         timelineData = timelineData? JSON.parse(timelineData) : []
         this.setState({
           data:timelineData
@@ -146,7 +149,7 @@ export default class Timelinee extends React.Component {
                 data : dataArray
             });
 
-            await  AsyncStorage.setItem('timelineData', JSON.stringify(dataArray))
+            await  AsyncStorage.setItem(`timelineData${this.props.currentID}`, JSON.stringify(dataArray))
             
             
 
@@ -176,4 +179,9 @@ const styles = StyleSheet.create({
 
     
 });
+
+
+export default connect(state => ({
+    currentID: state.CurrentID.currentID
+}))(Timelinee);
 

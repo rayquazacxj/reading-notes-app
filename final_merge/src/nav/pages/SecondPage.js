@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 //import react in our code. 
 import { StyleSheet, View, AsyncStorage, TextInput} from 'react-native';
 import { Container, Header, Item, Text, Icon, Button, Input, Card, CardItem} from 'native-base';
-import { useNavigation } from '@react-navigation/native';
+
+import {set_current_bookID} from '../../state/bookID_action'
+import {connect} from 'react-redux';
 //import all the components we are going to use.
 
-export default class SecondPage extends Component {
+class SecondPage extends Component {
     constructor(props) {
         super(props);
         this.state = { text: '' };
@@ -20,7 +22,8 @@ export default class SecondPage extends Component {
 
     const { navigate } = this.props.navigation;
     
-    
+    console.log('currentID: ',this.props.currentID)
+    console.log('this is second page')
 
     return (
         <Container>
@@ -42,23 +45,23 @@ export default class SecondPage extends Component {
         
         <Card style = {styles.cardstyle}>
         <CardItem>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(1)); navigate('ShowPage')}}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(2)); navigate('ShowPage')}}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(3)); navigate('ShowPage')}}></Button>
         </CardItem>
         <CardItem>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(4)); navigate('ShowPage')}}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(5)); navigate('ShowPage')}}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(6)); navigate('ShowPage')}}></Button>
         </CardItem>
         <CardItem>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(7)); navigate('ShowPage')}}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(8)); navigate('ShowPage')}}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(9)); navigate('ShowPage')}}></Button>
         </CardItem>
         <CardItem>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
-        <Button style = {styles.buttonlist} onPress={() =>navigate('ShowPage')}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(10)); navigate('ShowPage')}}></Button>
+        <Button style = {styles.buttonlist} onPress={() =>{this.props.dispatch(set_current_bookID(11)); navigate('ShowPage')}}></Button>
         <Button style = {styles.buttonlist} onPress = {async() =>{
                 try {
                     const value = await AsyncStorage.getItem('@BookNum:count');
@@ -168,6 +171,7 @@ export default class SecondPage extends Component {
               
               <Button style = {styles.bottomButton}><Text> PROFILE</Text></Button>
               
+              <Button style = {styles.bottomButton} onPress={() =>{navigate('PictureGen')}}><Text> PictureGen</Text></Button>
               {/* <Button style = {styles.bottomButton} onPress={() =>navigate('EighthPage')}><Text>TIMELINE</Text></Button> */}
              </CardItem>
         </Card>
@@ -213,3 +217,8 @@ const styles = StyleSheet.create({
     marginHorizontal:15,
   },
 });
+
+
+export default connect(state => ({
+    currentID : state.CurrentID.currentID
+}))(SecondPage);

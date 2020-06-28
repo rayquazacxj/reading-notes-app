@@ -42,13 +42,13 @@ class Mindmap extends React.Component {
     }
 
     render() {
-        const {selectedKey1,mindmapItemNum,connectSet} = this.props;
+        const {selectedKey1,mindmapItemNum,connectSet,currentID} = this.props;
         console.log('selectedKey1: ',selectedKey1,'mindmapItemNum: ',mindmapItemNum,'connectSet: ',connectSet)
         var i=0
         let added_buttons_goes_here =  []
         for(i=0; i<mindmapItemNum ; i++){
             added_buttons_goes_here.push(
-                <MindmapItem  key={i} idx={`MindmapItem${i}`} id={i} text={this.state.itemTexts[i]}></MindmapItem>
+                <MindmapItem  key={i} idx={`MindmapItem${currentID}-${i}`} id={i} text={this.state.itemTexts[i]}></MindmapItem>
             )
         }
 
@@ -75,23 +75,18 @@ class Mindmap extends React.Component {
                     <View>
                         <View style={{flexDirection:'row'}}>
                             <Button title="Add more" onPress={this.handleAddButton} style={{flex:1,backgroundColor:'#BCDBCA'}} >
-                                <Text style={{color:'#397956'}}>         Add more</Text>
+                                <Text style={{color:'#397956'}}>            Add more</Text>
                             </Button>
                             <Button title="connect" onPress={this.get_connectLines} style={{flex:1,backgroundColor:'#BCDBCA'}} >
-                                <Text style={{color:'#397956'}}>         connect</Text>
+                                <Text style={{color:'#397956'}}>            connect</Text>
                             </Button>
-                            <GoToButton screenName="Timelinee"></GoToButton>
+                            
                         </View>
                         {added_buttons_goes_here}
                         <Svg  height="640" width="410" viewBox="-50 50 400 500">
                         
                             {connect_lines}
-                        
-                            
 
-                        
-                            
-                             
                         </Svg>
                     </View>
 
@@ -99,7 +94,7 @@ class Mindmap extends React.Component {
             </Container>
 
         )
-        
+        //<GoToButton screenName="Timelinee"></GoToButton>
     }
     handleAddButton() {
         this.props.dispatch(update_mindmapItemNum());      
@@ -131,12 +126,12 @@ class Mindmap extends React.Component {
         for(let i=0;i<this.props.connectSet.length;i++){
 
             if(this.props.connectSet[i][0]!=null && this.props.connectSet[i][1]!=null && this.props.connectSet[i][0]!=this.props.connectSet[i][1]){
-                let connectItem1 = await AsyncStorage.getItem(`MindmapItem${this.props.connectSet[i][0]}`)
+                let connectItem1 = await AsyncStorage.getItem(`MindmapItem${this.props.currentID}-${this.props.connectSet[i][0]}`)
                 console.log('connectItem1: ',connectItem1 )
                 if(!connectItem1)continue
                 connectItem1 = JSON.parse(connectItem1);
                 
-                let connectItem2 = await AsyncStorage.getItem(`MindmapItem${this.props.connectSet[i][1]}`)
+                let connectItem2 = await AsyncStorage.getItem(`MindmapItem${this.props.currentID}-${this.props.connectSet[i][1]}`)
                 console.log('connectItem2: ',connectItem2 )
                 if(!connectItem2)continue
                 connectItem2 = JSON.parse(connectItem2);
@@ -198,5 +193,6 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
     ...state.ConnectMindmapItem,
-    mindmapItemNum : state.MindmapInfo.mindmapItemNum
+    mindmapItemNum : state.MindmapInfo.mindmapItemNum,
+    currentID: state.CurrentID.currentID
 }))(Mindmap);

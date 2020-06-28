@@ -16,7 +16,7 @@ import Draggable from 'react-native-draggable'
 import {GoToButton} from '../../api/navigation';
 import { ViewShot,captureRef } from "react-native-view-shot";
 import CameraRoll from "@react-native-community/cameraroll";
-import AsyncStorage from '@react-native-community/async-storage';
+
 
 
   export default class PictureGen extends React.Component {
@@ -59,7 +59,7 @@ import AsyncStorage from '@react-native-community/async-storage';
                     <Button  style={styles.button} onPress={()=> this.setState({pictureSelector_invisible:!this.state.pictureSelector_invisible})} ><Text style={{color:'#397956'}}>   picture </Text></Button>
                     
                     
-                    <GoToButton  screenName="Mindmap" />
+                    
                 </View>
 
                 <View collapsable={false} ref={this.ref} > 
@@ -91,7 +91,7 @@ import AsyncStorage from '@react-native-community/async-storage';
                         </Text>  
                     </Draggable>
 
-                    <View style={{marginTop:379,flexDirection:'row',opacity: this.state.pictureSelector_invisible? 0:100}}>
+                    <View style={{marginTop:434,flexDirection:'row',opacity: this.state.pictureSelector_invisible? 0:100}}>
                         <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../../assets/PIC1.png'))} underlayColor="green">
                             <Image source={require('../../assets/PIC1.png') }  style={{width:411/3,height:150,borderColor:'#397956',borderWidth:3,opacity:0.8}}></Image>
                         </TouchableHighlight>

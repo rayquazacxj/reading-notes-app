@@ -93,12 +93,25 @@ class MindmapItem extends React.Component {
     async handleInfo(){
             let itemInfo = await AsyncStorage.getItem(this.props.idx)
             console.log('itemInfo(in mindmapItem): ',itemInfo )
-            itemInfo = JSON.parse(itemInfo)
-            this.setState({
-                text: itemInfo.text,
-                X: itemInfo.X,//-100,  
-                Y: itemInfo.Y//-120
-            });
+            if(itemInfo){
+                itemInfo = JSON.parse(itemInfo)
+
+                this.setState({
+                    text: itemInfo.text,
+                    X: itemInfo.X,//-100,  
+                    Y: itemInfo.Y//-120
+                });
+
+            }else{ 
+                let initInfo = {
+                    X: this.state.X,
+                    Y: this.state.Y,
+                    text : ""
+                }
+                await  AsyncStorage.setItem(this.props.idx, JSON.stringify(initInfo))
+            }
+            
+            
             console.log('itemInfo: ',this.state.X,this.state.Y,this.props.idx)
             
     }
@@ -180,6 +193,6 @@ const styles = StyleSheet.create({
 
 export default connect(state => ({
     ...state.ConnectMindmapItem,
-    mindmapItemNum: state.MindmapInfo.mindmapItemNum
-    
+    mindmapItemNum: state.MindmapInfo.mindmapItemNum,
+    currentID: state.CurrentID.currentID
 }))(MindmapItem);
