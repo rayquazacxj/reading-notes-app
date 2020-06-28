@@ -34,7 +34,12 @@ export function ConnectMindmapItem(state = initMindMapState, action) {
                 selectNum:    0
                
             };
-        
+        case '@MINDMAP_CONNECT/INIT_CONNECTSET':
+            return {
+                ...state,
+                connectSet:[...state.connectSet, action.initConnectSet]
+            }
+
         default:
             return state;
     }

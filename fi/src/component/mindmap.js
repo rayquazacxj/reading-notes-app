@@ -23,7 +23,7 @@ import { Container, Header, Content, Item, Input , Button} from 'native-base';
 import Draggable from 'react-native-draggable'
 import MindmapItem from './mindmapItem'
 import {connect} from 'react-redux';
-import {update_mindmapItemNum } from '../state/mindmap-action'
+import {update_mindmapItemNum ,init_connectSet} from '../state/mindmap-action'
 import AsyncStorage from '@react-native-community/async-storage';
 
 class Mindmap extends React.Component {
@@ -36,6 +36,7 @@ class Mindmap extends React.Component {
         }
         this.handleAddButton = this.handleAddButton.bind(this)
         this.get_connectLines = this.get_connectLines.bind(this)
+        this.get_dataFromStorage = this.get_dataFromStorage.bind(this)
         
     }
 
@@ -105,31 +106,23 @@ class Mindmap extends React.Component {
 
     componentDidMount(){
         console.log('hi mindmap!')
+        //this.get_dataFromStorage()
         this.get_connectLines()
         console.log('hi mindmap hi!')
        
     }
-    componentDidUpdate(){/*
-        console.log('hi mindmap - get_connectLines 1!')
-        this.get_connectLines()
-        console.log('hi mindmap - get_connectLines 2!')*/
-        /*
-            this.get_connectLines().then( data => {
-                let connect_lines_ = []
-                for(i=0; i<connectSet.length ; i++){
-                    connect_lines_.push(
-                        <Line x1={this.state.connect_positions[i][0]} y1={this.state.connect_positions[i][1]} x2={this.state.connect_positions[i][2]} y2={this.state.connect_positions[i][3] } stroke="green" strokeWidth="2" /> 
-                    )
-                } 
-                this.setState({
-                    connect_lines: connect_lines_,
-                });
-
-            
-            })*/
+    componentDidUpdate(){
     }
 
+    async get_dataFromStorage(){
+        let book_id_connectSet = await AsyncStorage.getItem('book_id_connectSet') //`book_${id}_connectSet`
+        console.log('book_id_connectSet(in mindmap): ',book_id_connectSet )
+        book_id_connectSet = book_id_connectSet ? JSON.parse(book_id_connectSet):[]
 
+        this.props.dispatch(init_connectSet(book_id_connectSet));
+
+    }
+    
     async get_connectLines(){
         
         var connectlines = []

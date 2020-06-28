@@ -67,10 +67,27 @@ class MindmapItem extends React.Component {
         this.props.dispatch(set_connect_candidate(this.props.id));
 
         if(this.props.selectNum>0 && this.props.selectedKey1!=null && this.props.selectedKey2!=null){
+            let prev_ConnectSetNum = this.props.connectSet.length
+
             this.props.dispatch(update_connectSet());
+
+            if(this.props.connectSet.length > prev_ConnectSetNum ){
+                console.log('update connectSet in storage')
+                this.update_connectSetInStorage()
+            }
         }
 
         //console.log('selectedKey1: ',this.props.selectedKey1)
+    }
+
+    async update_connectSetInStorage(){
+        //let book_id_connectSet = await AsyncStorage.getItem('book_id_connectSet') //`book_${id}_connectSet`
+       // console.log('book_id_connectSet(in mindmap): ',book_id_connectSet )
+        //book_id_connectSet = book_id_connectSet ? JSON.parse(book_id_connectSet):[]
+        
+        await  AsyncStorage.setItem('book_id_connectSet', JSON.stringify(this.props.connectSet))
+
+
     }
 
     async handleInfo(){

@@ -10,6 +10,13 @@ export function update_connectSet() {
     };
 }
 
+export function init_connectSet(init_connectSet_) {
+    return {
+        type: '@MINDMAP_CONNECT/INIT_CONNECTSET',
+        init_connectSet:init_connectSet_
+    };
+}
+
 
 export function update_mindmapItemNum() {
     return {
