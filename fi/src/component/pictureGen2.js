@@ -27,7 +27,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 
         this.state = {
-          selectedPic:require('../picture/PIC3.png') ,
+          selectedPic:require('../picture/PIC1.png') ,
           text: '',
           style:{
             fontSize:30,
@@ -55,28 +55,31 @@ import AsyncStorage from '@react-native-community/async-storage';
             <Container>
                 
                 <View style={{flexDirection:'row'}}>
-                    <Button  small success onPress={()=> this.setState({editor_invisible:!this.state.editor_invisible})} ><Text>  invisible </Text></Button>
-                    <Button  small success onPress={()=> this.setState({pictureSelector_invisible:!this.state.pictureSelector_invisible})} ><Text>  PICinvisible </Text></Button>
+                    <Button  style={styles.button} onPress={()=> this.setState({editor_invisible:!this.state.editor_invisible})} ><Text style={{color:'#397956'}}>  edit </Text></Button>
+                    <Button  style={styles.button} onPress={()=> this.setState({pictureSelector_invisible:!this.state.pictureSelector_invisible})} ><Text style={{color:'#397956'}}>   picture </Text></Button>
                     
                     
-                    <GoToButton screenName="Mindmap" />
+                    <GoToButton  screenName="Mindmap" />
                 </View>
 
                 <View collapsable={false} ref={this.ref} > 
                   
                   <ImageBackground source={this.state.selectedPic }  style={{width:411,height:650}}>
                     <View style={{opacity: this.state.editor_invisible? 0:100}}>
-                        <Item rounded  style={{backgroundColor:'white',opacity:0.8}}>
+
+                        <View style={{flexDirection:'row'}}>
+                            <Button  style={styles.button}  onPress={()=>this.setState({style:{...this.state.style,color:'green'}})} ><Text style={{color:'#397956'}}>  color </Text></Button>
+                            <Button  style={styles.button}  onPress={()=>this.setState({style:{...this.state.style,fontSize:40}})} ><Text style={{color:'#397956'}}>  fontSize </Text></Button>
+                            <Button  style={styles.button}  onPress={()=>this.setState({style:{...this.state.style,fontFamily:'pirulen'}})} ><Text style={{color:'#397956'}}>  fontA </Text></Button>
+                            <Button  style={styles.button}  onPress={()=>this.setState({style:{...this.state.style,fontFamily:'vincHand'}})} ><Text style={{color:'#397956'}}>  fontB </Text></Button>
+                        </View>
+
+                        <Item   style={{backgroundColor:'white',opacity:0.8}}>
                             <Input style={this.state.style} placeholder="type here"  onChangeText={(text)=>this.setState({description: text})}/>
                         </Item>
 
                         
-                        <View style={{flexDirection:'row'}}>
-                        <Button  small success onPress={()=>this.setState({style:{...this.state.style,color:'green'}})} ><Text>  color </Text></Button>
-                            <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontSize:50}})} ><Text>  FONTSIZE </Text></Button>
-                            <Button  small success onPress={()=>this.setState({style:{fontFamily:'pirulen',...this.state.style}})} ><Text>  fontA </Text></Button>
-                            <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontFamily:'vincHand'}})} ><Text>  fontB </Text></Button>
-                        </View>
+                        
                         
                     </View>
                     
@@ -88,17 +91,17 @@ import AsyncStorage from '@react-native-community/async-storage';
                         </Text>  
                     </Draggable>
 
-                    <View style={{marginTop:340,flexDirection:'row',opacity: this.state.pictureSelector_invisible? 0:100}}>
+                    <View style={{marginTop:379,flexDirection:'row',opacity: this.state.pictureSelector_invisible? 0:100}}>
                         <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../picture/PIC1.png'))} underlayColor="green">
-                            <Image source={require('../picture/PIC1.png') }  style={{width:150,height:150}}></Image>
+                            <Image source={require('../picture/PIC1.png') }  style={{width:411/3,height:150,borderColor:'#397956',borderWidth:3,opacity:0.8}}></Image>
                         </TouchableHighlight>
 
                         <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../picture/PIC2.png'))} underlayColor="green">
-                            <Image source={require('../picture/PIC2.png') }  style={{width:150,height:150}}></Image>
+                            <Image source={require('../picture/PIC2.png') }  style={{width:411/3,height:150,borderColor:'#397956',borderWidth:3,opacity:0.8}}></Image>
                         </TouchableHighlight>
 
                         <TouchableHighlight onPressIn={()=>this.handleSelectPic(require('../picture/PIC3.png'))} underlayColor="green">
-                            <Image source={require('../picture/PIC3.png') }  style={{width:150,height:150}}></Image>
+                            <Image source={require('../picture/PIC3.png') }  style={{width:411/3,height:150,borderColor:'#397956',borderWidth:3,opacity:0.8}}></Image>
                         </TouchableHighlight>
                     </View>
 
@@ -111,15 +114,8 @@ import AsyncStorage from '@react-native-community/async-storage';
         
     }
     
-    /*
-    <View style={{flexDirection:'row'}}>
-        <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontWeight: 'bold',fontSize: 40}})} ><Text>  bold </Text></Button>
-        <Button  small success onPress={()=>this.setState({style:{...this.state.style,fontStyle: 'italic'}})} ><Text>  italic </Text></Button>
-        <Button  small success onPress={()=>this.setState({style:{...this.state.style,textDecorationLine: 'underline'}})} ><Text>  underline </Text></Button>
-        <Button  small success onPress={()=>this.setState({style:{...this.state.style,textDecorationLine: 'line-through'}})} ><Text>  line-through </Text></Button>
-        
-    </View>
-                        */
+    
+                        
     handleSelectPic(pic){
       this.setState({
           selectedPic: pic 
@@ -187,15 +183,14 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 
   const styles = StyleSheet.create({
-    buttont: {
-        marginBottom: 30,
-        width: 150,
-        height:100,
-        borderRadius: 100,
-        alignItems: 'center',
-        backgroundColor: 'yellow',
+    button: {
+        flex:1,
+        height:30,
+        alignItems: 'stretch',
+        backgroundColor: '#BCDBCA',
        
       },
+
       test:{fontSize: 40, fontFamily: "pirulen", fontWeight: "bold", fontStyle: "italic", textDecorationLine: "underline"}
       
       
