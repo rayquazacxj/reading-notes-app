@@ -20,7 +20,8 @@ export function ConnectMindmapItem(state = initMindMapState, action) {
                 return{
                     ...state,
                     selectedKey2: null,
-                    selectNum:    1
+                    selectedKey1: null,
+                    selectNum:    0
                 }
             }
             

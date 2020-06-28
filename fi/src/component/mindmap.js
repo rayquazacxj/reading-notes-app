@@ -25,6 +25,7 @@ import MindmapItem from './mindmapItem'
 import {connect} from 'react-redux';
 import {update_mindmapItemNum ,init_connectSet} from '../state/mindmap-action'
 import AsyncStorage from '@react-native-community/async-storage';
+import {GoToButton} from '../api/navigation';
 
 class Mindmap extends React.Component {
     constructor(props) {
@@ -79,6 +80,7 @@ class Mindmap extends React.Component {
                             <Button title="connect" onPress={this.get_connectLines} style={{flex:1}} >
                                 <Text style={{color:'white'}}>         connect</Text>
                             </Button>
+                            <GoToButton screenName="Timelinee"></GoToButton>
                         </View>
                         {added_buttons_goes_here}
                         <Svg  height="640" width="410" viewBox="-50 50 400 500">
@@ -122,7 +124,7 @@ class Mindmap extends React.Component {
         this.props.dispatch(init_connectSet(book_id_connectSet));
 
     }
-    
+
     async get_connectLines(){
         
         var connectlines = []

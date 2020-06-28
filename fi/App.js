@@ -40,6 +40,8 @@ import {ConnectMindmapItem , MindmapInfo} from './src/state/mindmap_reducer'
 import Timelinee from './src/component/timeline'
 import Mindmap from './src/component/mindmap'
 import PictureGen from './src/component/pictureGen2'
+import { GoToButton } from './src/api/navigation';
+
 
 const Stack = createStackNavigator();
 
@@ -93,28 +95,29 @@ export default class App extends React.Component {
                 </Stack.Navigator>
               </Root>
             </Provider>
-            
-            <Footer>
-              <FooterTab>
-                <Button vertical>
-                  <Icon name="apps" />
-                  <Text>Apps</Text>
-                </Button>
-                <Button vertical>
-                  <Icon name="camera" />
-                  <Text>Camera</Text>
-                </Button>
-                <Button vertical active>
-                  <Icon active name="navigate" />
-                  <Text>Navigate</Text>
-                </Button>
-                <Button vertical>
-                  <Icon name="person" />
-                  <Text>Contact</Text>
-                </Button>
-              </FooterTab>
-            </Footer>
 
+                  <Footer>
+                    <FooterTab>
+                      <Button vertical>
+                        <Icon name="apps" />
+                        <Text>Apps</Text>
+                      </Button>
+                      <Button vertical active >
+                        <Icon name="camera" />
+                        <Text>Camera</Text>
+                        </Button>
+                      <Button vertical active >
+                        <Icon active name="navigate" />
+                        <Text>Navigate</Text>
+                      </Button>
+                      <Button vertical>
+                        <Icon name="person" />
+                        <Text>Contact</Text>
+                      </Button>
+                    </FooterTab>
+                  </Footer>
+              
+                  
             
           
 

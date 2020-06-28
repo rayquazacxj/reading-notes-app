@@ -4,14 +4,14 @@ import {
     SafeAreaView,
     StyleSheet,
     ScrollView,
-    StatusBar,
+    KeyboardAvoidingView,
     View
   } from 'react-native'
 
 import { Container, Header, Content, Item, Input ,Text, Button} from 'native-base';
-import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-import {GoToButton} from 'C:/Users/USER/Desktop/f1/ss_final/fi/src/api/navigation';
+import {GoToButton} from '../api/navigation';
+import Draggable from 'react-native-draggable'
 
 export default class Timelinee extends React.Component {
     
@@ -26,7 +26,13 @@ export default class Timelinee extends React.Component {
             {time: '16:30', title: 'Event 5', description: 'Event 5 Description'}
           ]*/
 
-        this.state = {title:'',time:'',description:"",data:[]};
+        this.state = {
+            title:'',
+            time:'',
+            description:"",
+            data:[],
+            editing:true
+        };
         
           this.handleInputChange = this.handleInputChange.bind(this);
           this.handleAddData = this.handleAddData.bind(this)
@@ -35,6 +41,7 @@ export default class Timelinee extends React.Component {
     }
 
     componentWillMount(){
+        this.handleGetDataFromStorage()
    }
 
     render() {
@@ -42,13 +49,13 @@ export default class Timelinee extends React.Component {
             <Container style={styles.flex}>
                 
 
-                <Timeline style={styles.Timeline,{flex:3,padding:30}}
+                <Timeline style={styles.Timeline,{flex:4,padding:30}}
                 //..other props
                 circleSize={20}
-                circleColor='rgb(45,156,219)'
-                lineColor='rgb(45,156,219)'
+                circleColor='#62A5B2'
+                lineColor='#DDF2EE'
                 timeContainerStyle={{minWidth:52, marginTop: -5}}
-                timeStyle={{textAlign: 'center', backgroundColor:'#ff9797', color:'white', padding:5, borderRadius:13}}
+                timeStyle={{textAlign: 'center', backgroundColor:'#3CEF60', color:'white', padding:5, borderRadius:13}}
                 descriptionStyle={{color:'gray'}}
                 options={{
                     style:{paddingTop:5}
@@ -56,23 +63,38 @@ export default class Timelinee extends React.Component {
                 data={this.state.data}
                 innerCircle={'dot'}
                 />
+                <Draggable x={220} y={3}>
+                    <GoToButton screenName="PictureGen2" />
+                </Draggable>
+                <Draggable x={320} y={40}>
+                    <Button  small success onPress={()=>this.setState({editing:!this.state.editing})} ><Text>  edit </Text></Button>
+                </Draggable>
 
-                <GoToButton screenName="PictureGen2" />
+                
 
-                <Container style={styles.input,{flex:2,padding:10}}>
-                    <Item >
-                        <Input placeholder="Event"   onChangeText={(text)=>this.setState({title:text})}/>
-                    </Item>
-                    <Item >
-                        <Input placeholder="Time" onChangeText={(text)=>this.setState({time:text})}/>
-                    </Item>
-                    <Item rounded >
+                    
+            <KeyboardAvoidingView type={'behavior'} style={styles.input,{flex:2,padding:10}}>
+                <Container style={styles.input,{flex:2,padding:10,opacity:this.state.editing?100:0,justifyContent: "flex-end"}}>
+                    
+                    <View style={{flexDirection:'row'}}>
+                        
+                            <Input placeholder="Event"   onChangeText={(text)=>this.setState({title:text})}/>
+                       
+                        
+                            <Input placeholder="Time" onChangeText={(text)=>this.setState({time:text})}/>
+                        
+                    </View>
+
+                    <Item>
                         <Input placeholder="Description"  onChangeText={(text)=>this.setState({description:text})}/>
                     </Item>
+
                     <Button  small success onPress={this.handleAddData} ><Text>  ADD </Text></Button>
-                    <Button  small success onPress={this.handleGetDataFromStorage} ><Text>  GetDataFromStorage </Text></Button>
-                    
+                
                 </Container>
+            </KeyboardAvoidingView>
+                   
+                
                 
                 
             </Container>
@@ -80,8 +102,11 @@ export default class Timelinee extends React.Component {
         
     }
 
+    //<Button  small success onPress={this.handleGetDataFromStorage} ><Text>  GetDataFromStorage </Text></Button>
+    //<Container style={styles.input,{flex:2,padding:10,opacity:this.state.editing?100:0}}>
     async handleGetDataFromStorage(evt){
-        evt.persist();
+       // evt.persist();
+       //AsyncStorage.removeItem('timelineData')
         let timelineData = await AsyncStorage.getItem('timelineData')//`$timelineData{this.props.idx}`
         console.log('timelineData: ',timelineData )
         timelineData = timelineData? JSON.parse(timelineData) : []
