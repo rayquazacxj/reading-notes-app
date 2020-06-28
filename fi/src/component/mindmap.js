@@ -74,11 +74,11 @@ class Mindmap extends React.Component {
 
                     <View>
                         <View style={{flexDirection:'row'}}>
-                            <Button title="Add more" onPress={this.handleAddButton} style={{flex:1}} >
-                                <Text style={{color:'white'}}>         Add more</Text>
+                            <Button title="Add more" onPress={this.handleAddButton} style={{flex:1,backgroundColor:'#BCDBCA'}} >
+                                <Text style={{color:'#397956'}}>         Add more</Text>
                             </Button>
-                            <Button title="connect" onPress={this.get_connectLines} style={{flex:1}} >
-                                <Text style={{color:'white'}}>         connect</Text>
+                            <Button title="connect" onPress={this.get_connectLines} style={{flex:1,backgroundColor:'#BCDBCA'}} >
+                                <Text style={{color:'#397956'}}>         connect</Text>
                             </Button>
                             <GoToButton screenName="Timelinee"></GoToButton>
                         </View>

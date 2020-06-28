@@ -96,21 +96,21 @@ export default class App extends React.Component {
               </Root>
             </Provider>
 
-                  <Footer>
-                    <FooterTab>
-                      <Button vertical>
+                  <Footer >
+                    <FooterTab style={styles.button}>
+                      <Button vertical style={styles.button}>
                         <Icon name="apps" />
                         <Text>Apps</Text>
                       </Button>
-                      <Button vertical active >
+                      <Button vertical active style={styles.button}>
                         <Icon name="camera" />
                         <Text>Camera</Text>
                         </Button>
-                      <Button vertical active >
+                      <Button vertical active style={styles.button} >
                         <Icon active name="navigate" />
                         <Text>Navigate</Text>
                       </Button>
-                      <Button vertical>
+                      <Button vertical style={styles.button}>
                         <Icon name="person" />
                         <Text>Contact</Text>
                       </Button>
@@ -126,48 +126,7 @@ export default class App extends React.Component {
   }
 }
 
-/*
-<Fab
-              active={this.state.active}
-              direction="up"
-              containerStyle={{ }}
-              style={{ backgroundColor: '#5067FF' }}
-              position="bottomRight"
-              onPress={() => this.setState({ active: !this.state.active })}>
-              <Icon name="share" />
-              <Button style={{ backgroundColor: '#34A34F' }}>
-                <Icon name="logo-whatsapp" />
-              </Button>
-              <Button style={{ backgroundColor: '#3B5998' }}>
-                <Icon name="logo-facebook" />
-              </Button>
-              <Button disabled style={{ backgroundColor: '#DD5144' }}>
-                <Icon name="mail" />
-              </Button>
-            
-            </Fab>
-            
 
-            <Footer>
-              <FooterTab>
-                <Button vertical>
-                  <Icon name="apps" />
-                  <Text>Apps</Text>
-                </Button>
-                <Button vertical>
-                  <Icon name="camera" />
-                  <Text>Camera</Text>
-                </Button>
-                <Button vertical active>
-                  <Icon active name="navigate" />
-                  <Text>Navigate</Text>
-                </Button>
-                <Button vertical>
-                  <Icon name="person" />
-                  <Text>Contact</Text>
-                </Button>
-              </FooterTab>
-            </Footer>*/
 
 
 const styles = StyleSheet.create({
@@ -176,6 +135,9 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     alignItems: 'stretch',
   },
+  button:{
+    backgroundColor:'#BCDBCA'
+  }
 });
 
 //export default App;

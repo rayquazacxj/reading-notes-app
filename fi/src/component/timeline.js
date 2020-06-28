@@ -102,8 +102,7 @@ export default class Timelinee extends React.Component {
         
     }
 
-    //<Button  small success onPress={this.handleGetDataFromStorage} ><Text>  GetDataFromStorage </Text></Button>
-    //<Container style={styles.input,{flex:2,padding:10,opacity:this.state.editing?100:0}}>
+   
     async handleGetDataFromStorage(evt){
        // evt.persist();
        //AsyncStorage.removeItem('timelineData')
@@ -149,22 +148,7 @@ export default class Timelinee extends React.Component {
 
             await  AsyncStorage.setItem('timelineData', JSON.stringify(dataArray))
             
-            /*
-            const storeData = async () => {
-                try {
-                  let newData = JSON.stringify(dataArray)
-                  //const jsonValue = JSON.stringify(dataArray)
-                  const timelineDataSet = await AsyncStorage.getItem('timelineData')
-                  const newSet = [
-                     newData
-                  ]
-                  let timelineData = (timelineDataSet!=null) ? JSON.parse(timelineDataSet) : null;
-
-                  await AsyncStorage.setItem('@storage_Key', jsonValue)
-                } catch (e) {
-                  // saving error
-                }
-              }*/
+            
 
             console.log(this.state.data)
         }
@@ -179,9 +163,7 @@ const styles = StyleSheet.create({
     Timeline: {
         alignSelf:'center',
 
-        /*
-        justifyContent:'space-evenly',
-        alignItems: "center",*/
+       
       },
       flex:{
         flexDirection: 'column',
@@ -195,8 +177,3 @@ const styles = StyleSheet.create({
     
 });
 
-/*
-export default connect((state, ownProps) => ({
-    tooltipOpen: state.postItem.tooltipOpen[ownProps.id] ? true : false
-}))(PostItem);
-*/
