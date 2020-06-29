@@ -637,6 +637,10 @@ export default class ForthPage extends Component {
             <Button disabled style={{ backgroundColor: '#DD5144' }}>
               <Icon name="mail" />
             </Button>
+
+            <Button  style={{ backgroundColor: '#DD5144' }} onPress={()=>{console.log('press shareButton');navigate('ShareScreen')}}>
+              <Icon name="save" />
+            </Button>
             
           </Fab>
           

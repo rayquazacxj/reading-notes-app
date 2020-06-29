@@ -496,6 +496,8 @@ class SecondPage extends Component {
         <Button style = {styles.buttonlist} 
         onPress = {async() =>{
                 try {
+                    
+
                     const value = await AsyncStorage.getItem('@BookNum:count');
                     if (value === NaN) {
                         try {

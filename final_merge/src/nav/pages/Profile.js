@@ -5,18 +5,35 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    AsyncStorage,
+    Animated,
+    Easing,
 } from 'react-native';
 
 
 
-export default class Profile extends Component {
-    state={
-        username:'username'
 
+export default class Profile extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.state={
+            username:'username',
+            
+            fadeInOpacity: new Animated.Value(0)
+        }
+
+        this.bookNUM = 0
+        this.getBookNum = this.getBookNum.bind(this)
     }
+    
 
     componentDidMount() {
+        
+        
+        this.getBookNum()
+
         Auth.currentAuthenticatedUser({
             bypassCache: true  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
         }).then(user => {
@@ -28,9 +45,20 @@ export default class Profile extends Component {
         let user = Auth.currentAuthenticatedUser();
 
         const { attributes } = user;
+
+        Animated.timing(this.state.fadeInOpacity, {
+            toValue: 1, 
+            duration: 3000, 
+            easing: Easing.linear 
+        }).start();
         //this.setState({ username:user.username })
         
 
+    }
+
+    async getBookNum(){
+        this.bookNUM = await AsyncStorage.getItem('@BookNum:count');
+        console.log(this.bookNUM)
     }
 
     signOut = async () => {
@@ -45,18 +73,22 @@ export default class Profile extends Component {
  
     render() {
         console.log('username(in Profile): ',this.state.username)
+        //console.log(this.bookNUM)
         return (
             <View style={styles.container}>
                 <View style={styles.header}></View>
-                <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
+                <Image style={styles.avatar} source={require('../../assets/PIKA.png')} />
                 <View style={styles.body}>
                     <View style={styles.bodyContent}>
                         <Text style={styles.name} > {this.state.username}</Text>
-                        <Text style={styles.info}>Student</Text>
-                        <Text style={styles.description}>
-                            Post number(0){"\n"}
-                            Book number(0)
-                        </Text>
+                        
+                        
+                        <Animated.Text style={[styles.animateView, {opacity: this.state.fadeInOpacity,fontSize:30}]}>
+                            
+                                     Book number: {this.bookNUM} !
+                            
+                        </Animated.Text>
+                        
     
 
                         <TouchableOpacity style={styles.buttonContainer} onPress={() => this.props.navigation.goBack()}>
@@ -105,6 +137,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         padding: 30,
+        marginTop:30
     },
     name: {
         fontSize: 28,
@@ -132,9 +165,21 @@ const styles = StyleSheet.create({
         width: 250,
         borderRadius: 30,
         backgroundColor: "#5f9ea0",
+        opacity:0.7
         
         
     },
+
+    animateView: {
+        height:50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        marginBottom:50
+    },
+    text: {
+        fontSize: 30
+    }
 });
 
 

@@ -5,7 +5,8 @@ import {
     StyleSheet,
     ScrollView,
     KeyboardAvoidingView,
-    View
+    View,
+   
   } from 'react-native'
 
 import { Container, Header, Content, Item, Input ,Text, Button} from 'native-base';
@@ -32,8 +33,12 @@ class Timelinee extends React.Component {
             time:'',
             description:"",
             data:[],
-            editing:true
+            editing:true,
+
+            //fadeInOpacity: new Animated.Value(0)
         };
+
+         
         
           this.handleInputChange = this.handleInputChange.bind(this);
           this.handleAddData = this.handleAddData.bind(this)
@@ -41,7 +46,7 @@ class Timelinee extends React.Component {
         
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.handleGetDataFromStorage()
    }
 
@@ -49,21 +54,23 @@ class Timelinee extends React.Component {
         return(
             <Container style={styles.flex}>
                 
+               
 
                 <Timeline style={styles.Timeline,{flex:4,padding:30}}
-                //..other props
-                circleSize={20}
-                circleColor='#62A5B2'
-                lineColor='#DDF2EE'
-                timeContainerStyle={{minWidth:52, marginTop: -5}}
-                timeStyle={{textAlign: 'center', backgroundColor:'#3CEF60', color:'white', padding:5, borderRadius:13}}
-                descriptionStyle={{color:'gray'}}
-                options={{
-                    style:{paddingTop:5}
-                }}
-                data={this.state.data}
-                innerCircle={'dot'}
-                />
+                    //..other props
+                    circleSize={20}
+                    circleColor='#62A5B2'
+                    lineColor='#DDF2EE'
+                    timeContainerStyle={{minWidth:52, marginTop: -5}}
+                    timeStyle={{textAlign: 'center', backgroundColor:'#3CEF60', color:'white', padding:5, borderRadius:13}}
+                    descriptionStyle={{color:'gray'}}
+                    options={{
+                        style:{paddingTop:5}
+                    }}
+                    data={this.state.data}
+                    innerCircle={'dot'}
+                    />
+             
                 
                 <Draggable x={320} y={40}>
                     <Button  small success onPress={()=>this.setState({editing:!this.state.editing})} ><Text>  edit </Text></Button>
@@ -112,9 +119,26 @@ class Timelinee extends React.Component {
         let timelineData = await AsyncStorage.getItem(`timelineData${this.props.currentID}`)//`$timelineData{this.props.idx}`
         console.log(`timelineData${this.props.currentID}: `,timelineData )
         timelineData = timelineData? JSON.parse(timelineData) : []
+
+        
         this.setState({
-          data:timelineData
-         });
+          data:timelineData,
+          
+         })
+         /*,()=>{
+            Animated.timing(this.state.fadeInOpacity, {
+                toValue: 1, 
+                duration: 2500, 
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start();
+            console.log(this.state.fadeInOpacity)
+         })*/
+
+         
+
+        
+
 
     }
 
@@ -163,6 +187,8 @@ class Timelinee extends React.Component {
 
 
 const styles = StyleSheet.create({
+    
+
     Timeline: {
         alignSelf:'center',
 
