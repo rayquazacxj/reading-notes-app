@@ -64,7 +64,7 @@ import CameraRoll from "@react-native-community/cameraroll";
 
                 <View collapsable={false} ref={this.ref} > 
                   
-                  <ImageBackground source={this.state.selectedPic }  style={{width:411,height:650}}>
+                  <ImageBackground source={this.state.selectedPic }  style={{width:411,height:680}}>
                     <View style={{opacity: this.state.editor_invisible? 0:100}}>
 
                         <View style={{flexDirection:'row'}}>

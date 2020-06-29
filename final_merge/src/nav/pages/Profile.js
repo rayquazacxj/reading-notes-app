@@ -19,13 +19,16 @@ export default class Profile extends Component {
     componentDidMount() {
         Auth.currentAuthenticatedUser({
             bypassCache: true  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-        }).then(user => console.log('user:',user))
+        }).then(user => {
+            console.log('user:',user)
+            this.setState({ username:user.username })
+        })
             .catch(err => console.log(err));
 
         let user = Auth.currentAuthenticatedUser();
 
         const { attributes } = user;
-        this.setState({ username:user.username })
+        //this.setState({ username:user.username })
         
 
     }
@@ -41,7 +44,7 @@ export default class Profile extends Component {
     }
  
     render() {
-
+        console.log('username(in Profile): ',this.state.username)
         return (
             <View style={styles.container}>
                 <View style={styles.header}></View>

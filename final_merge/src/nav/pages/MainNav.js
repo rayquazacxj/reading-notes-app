@@ -20,7 +20,8 @@ import Timelinee from './timeline'
 import PictureGen from './pictureGen2'
 import Mindmap from './mindmap'
 import SecondPage from './SecondPage'
-import ThirdPage from './ShowPage'
+//import ThirdPage from './ShowPage'
+import ShowPage2 from './ShowPage'
 import ForthPage from './ForthPage'
 
 const Stack = createStackNavigator()
@@ -86,8 +87,8 @@ export default class MainNav extends React.Component {
 
               
 
-              <Stack.Screen name="ShowPage" component={ThirdPage} />
-              <Stack.Screen name="Timelinee" component={Timelinee} />
+              <Stack.Screen name="ShowPage" component={ShowPage2} />
+              <Stack.Screen name="Timeline" component={Timelinee} />
               <Stack.Screen name="Mindmap" component={Mindmap} />
               <Stack.Screen name="PictureGen" component={PictureGen} />
 
