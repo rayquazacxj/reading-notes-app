@@ -353,17 +353,32 @@ const styles = StyleSheet.create({
 import React, { Component } from 'react';
 import {StyleSheet, TextInput, AsyncStorage} from 'react-native';
 import { Container, Header, View, Button, Icon, Fab, Content, Card, CardItem, Text, Body, Textarea, Form} from 'native-base';
+import {connect} from 'react-redux';
 
-export default class ForthPage extends Component {
+class ForthPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
       active: false,
-      text: ''
+      text: '',
+      content:'',
+
+      initTitle:'',
+      initContent:''
     };
+
+    this.init = true
+    this.getDataFromStorage = this.getDataFromStorage.bind(this)
   }
   render() {
     const { navigate } = this.props.navigation;
+
+    if(this.init){
+        this.init = false
+        this.getDataFromStorage()
+        console.log('in render 4 , get init data')
+    }
+
     return (  
       <Container style={{ backgroundColor: '#fffff8'}}>
         
@@ -372,12 +387,13 @@ export default class ForthPage extends Component {
           <Card style = {styles.card}>
             <CardItem header bordered>
             <TextInput  style = {styles.titleName}
+                        defaultValue={this.state.initTitle}
                         onChangeText = {(text) => this.setState({text})}
                         // value = {this.state.text}
                         
                         onEndEditing = {async () => {
                           try {
-                            const value = await AsyncStorage.getItem('@BookNum:count');
+                            const value = (this.props.currentID).toString()
                             if (value === '1') {
                                 try {
                                     await AsyncStorage.setItem('@Book1:Title', this.state.text);
@@ -496,104 +512,106 @@ export default class ForthPage extends Component {
               <Body>
                 <Form style = {styles.textArea}>
                 <TextInput  style = {styles.contentStyle}
-                            onChangeText = {(text) => this.setState({text})}
+                            defaultValue={this.state.initContent}
+                            onChangeText = {(text) => this.setState({content:text})}
                             // value = {this.state.text}
                             onEndEditing = {async () => {
                               try {
-                                const value = await AsyncStorage.getItem('@BookNum:count');
+                                const value = (this.props.currentID).toString()
+                                console.log('choose book:',value)
                                 if (value === '1') {
                                     try {
-                                        await AsyncStorage.setItem('@Book1:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book1:Content', this.state.content);
                                         console.log('set Book1 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book1 Content Error!');
                                     }
                                 } else if (value === '2'){
                                     try {
-                                        await AsyncStorage.setItem('@Book2:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book2:Content', this.state.content);
                                         console.log('set Book2 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book2 Content Error!');
                                     }
                                 } else if (value === '3'){
                                     try {
-                                        await AsyncStorage.setItem('@Book3:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book3:Content', this.state.content);
                                         console.log('set Book3 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book3 Content Error!');
                                     }
                                 } else if (value === '4'){
                                     try {
-                                        await AsyncStorage.setItem('@Book4:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book4:Content', this.state.content);
                                         console.log('set Book4 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book4 Content Error!');
                                     }
                                 } else if (value === '5'){
                                     try {
-                                        await AsyncStorage.setItem('@Book5:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book5:Content', this.state.content);
                                         console.log('set Book5 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book5 Content Error!');
                                     }
                                 } else if (value === '6'){
                                     try {
-                                        await AsyncStorage.setItem('@Book6:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book6:Content', this.state.content);
                                         console.log('set Book6 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book6 Content Error!');
                                     }
                                 } else if (value === '7'){
                                     try {
-                                        await AsyncStorage.setItem('@Book7:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book7:Content', this.state.content);
                                         console.log('set Book7 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book7 Content Error!');
                                     }
                                 } else if (value === '8'){
                                     try {
-                                        await AsyncStorage.setItem('@Book8:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book8:Content', this.state.content);
                                         console.log('set Book8 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book8 Content Error!');
                                     }
                                 } else if (value === '9'){
                                     try {
-                                        await AsyncStorage.setItem('@Book9:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book9:Content', this.state.content);
                                         console.log('set Book9 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book9 Content Error!');
                                     }
                                 } else if (value === '10'){
                                     try {
-                                        await AsyncStorage.setItem('@Book10:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book10:Content', this.state.content);
                                         console.log('set Book10 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book10 Content Error!');
                                     }
                                 } else if (value === '11'){
                                     try {
-                                        await AsyncStorage.setItem('@Book11:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book11:Content', this.state.content);
                                         console.log('set Book11 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book11 Content Error!');
                                     }
                                 } else if (value === '12'){
                                     try {
-                                        await AsyncStorage.setItem('@Book12:Content', this.state.text);
+                                        await AsyncStorage.setItem('@Book12:Content', this.state.content);
                                         console.log('set Book12 Content successful');
-                                        console.log(this.state.text);
+                                        console.log(this.state.content);
                                     } catch (error) {
                                         console.log('set Book12 Content Error!');
                                     }
@@ -660,6 +678,27 @@ export default class ForthPage extends Component {
       </Container>
     );
   }
+
+
+    async getDataFromStorage(){
+        let title =    await AsyncStorage.getItem(`@Book${this.props.currentID}:Title`);
+        let content =  await AsyncStorage.getItem(`@Book${this.props.currentID}:Content`);
+        
+        console.log('init: ',title,content)
+        this.setState({
+            initTitle : title,
+            initContent: content,
+            
+        })
+        console.log('initdata 4 page:',this.state.initTitle,this.state.initContent)
+
+    }
+
+    componentWillMount(){
+        console.log('hi componentDidMount in 4')
+        this.init = true
+    }
+
 }
 
 const styles = StyleSheet.create({
@@ -704,4 +743,6 @@ const styles = StyleSheet.create({
 
 });
 
-
+export default connect(state => ({
+    currentID: state.CurrentID.currentID
+}))(ForthPage);

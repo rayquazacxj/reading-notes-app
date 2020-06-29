@@ -16,7 +16,23 @@ class ShowPage extends Component {
   
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = { 
+        text: '' ,
+        author: '',
+        status: '',
+
+        initName:'',
+        initAuthor:'',
+        initStatus:''
+
+    };
+
+    this.init = true
+    //this.name =''
+    //this.author=''
+    //this.status = ''
+    this.getDataFromStorage = this.getDataFromStorage.bind(this)
+    
   }
   
   static navigationOptions = {
@@ -27,9 +43,16 @@ class ShowPage extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-
+    
     
     //console.log(this.props)
+
+    if(this.init){
+        this.init = false
+        this.getDataFromStorage()
+        console.log('in render 3 , get init data')
+    }
+   // console.log('in render 3',this.name,this.author,this.status)
 
     return (
       
@@ -47,6 +70,7 @@ class ShowPage extends Component {
               <Icon active name="logo-googleplus" />
               <TextInput  style = {styles.BASA}
                           onChangeText = {(text) => this.setState({text})}
+                          defaultValue = {this.state.initName}
                           // value = {this.state.text}
                           onEndEditing = {async () => {
                             try {
@@ -57,12 +81,13 @@ class ShowPage extends Component {
                                 console.log('bkName_change(in showPage)')
                               
 
-                              const value = await AsyncStorage.getItem('@BookChoose:Num');
+                            const value = (this.props.currentID).toString()
                               if (value === '1') {
                                   try {
                                       await AsyncStorage.setItem('@Book1:Name', this.state.text);
                                       console.log('set Book1 Name successful');
                                       console.log(this.state.text);
+
                                   } catch (error) {
                                       console.log('set Book1 Name Error!');
                                   }
@@ -175,104 +200,109 @@ class ShowPage extends Component {
              <CardItem>
               <Icon active name="logo-googleplus" />
               <TextInput  style = {styles.BASA}
-                          onChangeText = {(text) => this.setState({text})}
+                          //defaultValue ={}
+                          defaultValue = {this.state.initAuthor}
+                          onChangeText = {(text) => this.setState({author:text})}
                           // value = {this.state.text}
                           onEndEditing = {async () => {
                             try {
-                              const value = await AsyncStorage.getItem('@BookNum:count');
+                              const value = (this.props.currentID).toString()
+                              console.log('choose book:',value)
                               if (value === '1') {
                                   try {
-                                      await AsyncStorage.setItem('@Book1:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book1:Author', this.state.author);
                                       console.log('set Book1 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
+                                      let val = await AsyncStorage.getItem('@Book1:Author');
+                                      console.log('val: ',val)
                                   } catch (error) {
                                       console.log('set Book1 Author Error!');
                                   }
                               } else if (value === '2'){
                                   try {
-                                      await AsyncStorage.setItem('@Book2:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book2:Author', this.state.author);
                                       console.log('set Book2 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book2 Author Error!');
                                   }
                               } else if (value === '3'){
                                   try {
-                                      await AsyncStorage.setItem('@Book3:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book3:Author', this.state.author);
                                       console.log('set Book3 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book3 Author Error!');
                                   }
                               } else if (value === '4'){
                                   try {
-                                      await AsyncStorage.setItem('@Book4:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book4:Author', this.state.author);
                                       console.log('set Book4 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book4 Author Error!');
                                   }
                               } else if (value === '5'){
                                   try {
-                                      await AsyncStorage.setItem('@Book5:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book5:Author', this.state.author);
                                       console.log('set Book5 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book5 Author Error!');
                                   }
                               } else if (value === '6'){
                                   try {
-                                      await AsyncStorage.setItem('@Book6:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book6:Author', this.state.author);
                                       console.log('set Book6 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book6 Author Error!');
                                   }
                               } else if (value === '7'){
                                   try {
-                                      await AsyncStorage.setItem('@Book7:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book7:Author', this.state.author);
                                       console.log('set Book7 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book7 Author Error!');
                                   }
                               } else if (value === '8'){
                                   try {
-                                      await AsyncStorage.setItem('@Book8:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book8:Author', this.state.author);
                                       console.log('set Book8 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book8 Author Error!');
                                   }
                               } else if (value === '9'){
                                   try {
-                                      await AsyncStorage.setItem('@Book9:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book9:Author', this.state.author);
                                       console.log('set Book9 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book9 Author Error!');
                                   }
                               } else if (value === '10'){
                                   try {
-                                      await AsyncStorage.setItem('@Book10:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book10:Author', this.state.author);
                                       console.log('set Book10 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book10 Author Error!');
                                   }
                               } else if (value === '11'){
                                   try {
-                                      await AsyncStorage.setItem('@Book11:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book11:Author', this.state.author);
                                       console.log('set Book11 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book11 Author Error!');
                                   }
                               } else if (value === '12'){
                                   try {
-                                      await AsyncStorage.setItem('@Book12:Author', this.state.text);
+                                      await AsyncStorage.setItem('@Book12:Author', this.state.author);
                                       console.log('set Book12 Author successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.author);
                                   } catch (error) {
                                       console.log('set Book12 Author Error!');
                                   }
@@ -300,105 +330,107 @@ class ShowPage extends Component {
               
                 {/* <Text style={styles.temp}>{a}</Text> */}
               <TextInput  style = {styles.BASA}
-                          onChangeText = {(text) => this.setState({text})}
+                          onChangeText = {(text) => this.setState({status:text})}
                           // value = {this.state.text}
+                          defaultValue = {this.state.initStatus}
                           onEndEditing = {async () => {
                           try {
-                              const value = await AsyncStorage.getItem('@BookNum:count');
+                                const value = (this.props.currentID).toString()
                               
                               if (value === '1') {
                                   try {
-                                      await AsyncStorage.setItem('@Book1:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book1:Status', this.state.status);
                                       console.log('set Book1 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
+                                      
                                   } catch (error) {
                                       console.log('set Book1 Status Error!');
                                   }
                               } else if (value === '2'){
                                   try {
-                                      await AsyncStorage.setItem('@Book2:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book2:Status', this.state.status);
                                       console.log('set Book2 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book2 Status Error!');
                                   }
                               } else if (value === '3'){
                                   try {
-                                      await AsyncStorage.setItem('@Book3:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book3:Status', this.state.status);
                                       console.log('set Book3 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book3 Status Error!');
                                   }
                               } else if (value === '4'){
                                   try {
-                                      await AsyncStorage.setItem('@Book4:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book4:Status', this.state.status);
                                       console.log('set Book4 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book4 Status Error!');
                                   }
                               } else if (value === '5'){
                                   try {
-                                      await AsyncStorage.setItem('@Book5:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book5:Status', this.state.status);
                                       console.log('set Book5 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book5 Status Error!');
                                   }
                               } else if (value === '6'){
                                   try {
-                                      await AsyncStorage.setItem('@Book6:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book6:Status', this.state.status);
                                       console.log('set Book6 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book6 Status Error!');
                                   }
                               } else if (value === '7'){
                                   try {
-                                      await AsyncStorage.setItem('@Book7:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book7:Status', this.state.status);
                                       console.log('set Book7 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book7 Status Error!');
                                   }
                               } else if (value === '8'){
                                   try {
-                                      await AsyncStorage.setItem('@Book8:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book8:Status', this.state.status);
                                       console.log('set Book8 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book8 Status Error!');
                                   }
                               } else if (value === '9'){
                                   try {
-                                      await AsyncStorage.setItem('@Book9:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book9:Status', this.state.status);
                                       console.log('set Book9 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book9 Status Error!');
                                   }
                               } else if (value === '10'){
                                   try {
-                                      await AsyncStorage.setItem('@Book10:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book10:Status', this.state.status);
                                       console.log('set Book10 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book10 Status Error!');
                                   }
                               } else if (value === '11'){
                                   try {
-                                      await AsyncStorage.setItem('@Book11:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book11:Status', this.state.status);
                                       console.log('set Book11 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book11 Status Error!');
                                   }
                               } else if (value === '12'){
                                   try {
-                                      await AsyncStorage.setItem('@Book12:Status', this.state.text);
+                                      await AsyncStorage.setItem('@Book12:Status', this.state.status);
                                       console.log('set Book12 Status successful');
-                                      console.log(this.state.text);
+                                      console.log(this.state.status);
                                   } catch (error) {
                                       console.log('set Book12 Status Error!');
                                   }
@@ -445,6 +477,27 @@ class ShowPage extends Component {
       
     );
   }
+
+  async getDataFromStorage(){
+        let name =    await AsyncStorage.getItem(`@Book${this.props.currentID}:Name`);
+        let author =  await AsyncStorage.getItem(`@Book${this.props.currentID}:Author`);
+        let status =  await AsyncStorage.getItem(`@Book${this.props.currentID}:Status`);
+        console.log('get init data(func in p3): ',name,author,status)
+        this.setState({
+            initName : name,
+            initAuthor: author,
+            initStatus: status
+        })
+
+  }
+
+  componentWillMount(){
+      console.log('hi componentDidMount')
+      this.init = true
+    
+  }
+
+
 }
 const styles = StyleSheet.create({
   temp: {

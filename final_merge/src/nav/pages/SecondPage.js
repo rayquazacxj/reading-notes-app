@@ -244,7 +244,8 @@ class SecondPage extends Component {
             bkn9: '',
             bkn10: '',
             bkn11: '',
-            bookNames:[0]
+            bookNames:[0],
+            search:''
         };
         this.handleBookName = this.handleBookName.bind(this)
       }
@@ -270,11 +271,123 @@ class SecondPage extends Component {
           <Item>
             <Icon name="ios-search" />
             <TextInput  
-                          onChangeText = {(text) => this.setState({text})}
+                          onChangeText = {(text) => this.setState({search:text})}
                           // value = {this.state.text}
-                          onEndEditing = {async () => {
+                          onEndEditing = {
+                            async () => {
+                                try {
+                                    console.log('serach')   
+
+                                    const searchbkn1 = await AsyncStorage.getItem('@Book1:Name');
+                                    const searchbkn2 = await AsyncStorage.getItem('@Book2:Name');
+                                    const searchbkn3 = await AsyncStorage.getItem('@Book3:Name');
+                                    const searchbkn4 = await AsyncStorage.getItem('@Book4:Name');
+                                    const searchbkn5 = await AsyncStorage.getItem('@Book5:Name');
+                                    const searchbkn6 = await AsyncStorage.getItem('@Book6:Name');
+                                    const searchbkn7 = await AsyncStorage.getItem('@Book7:Name');
+                                    const searchbkn8 = await AsyncStorage.getItem('@Book8:Name');
+                                    const searchbkn9 = await AsyncStorage.getItem('@Book9:Name');
+                                    const searchbkn10 = await AsyncStorage.getItem('@Book10:Name');
+                                    const searchbkn11 = await AsyncStorage.getItem('@Book11:Name');
+                                    
+                                    if (this.state.search === searchbkn1) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '1');
+                                            this.props.dispatch(set_current_bookID(1));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 1 error');
+                                        }
+                                    } else if (this.state.search === searchbkn2) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '2');
+                                            this.props.dispatch(set_current_bookID(2));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 2 error');
+                                        }
+                                    } else if (this.state.search === searchbkn3) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '3');
+                                            this.props.dispatch(set_current_bookID(3));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 3 error');
+                                        }
+                                    } else if (this.state.search === searchbkn4) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '4');
+                                            this.props.dispatch(set_current_bookID(4));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 4 error');
+                                        }
+                                    } else if (this.state.search === searchbkn5) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '5');
+                                            this.props.dispatch(set_current_bookID(5));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 5 error');
+                                        }
+                                    } else if (this.state.search === searchbkn6) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '6');
+                                            this.props.dispatch(set_current_bookID(6));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 6 error');
+                                        }
+                                    } else if (this.state.search === searchbkn7) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '7');
+                                            this.props.dispatch(set_current_bookID(7));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 7 error');
+                                        }
+                                    } else if (this.state.search === searchbkn8) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '8');
+                                            this.props.dispatch(set_current_bookID(8));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 8 error');
+                                        }
+                                    } else if (this.state.search === searchbkn9) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '9');
+                                            this.props.dispatch(set_current_bookID(9));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 9 error');
+                                        }
+                                    } else if (this.state.search === searchbkn10) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '10');
+                                            this.props.dispatch(set_current_bookID(10));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 10 error');
+                                        }
+                                    } else if (this.state.search === searchbkn11) {
+                                        try { 
+                                            await AsyncStorage.setItem('@BookChoose:Num', '11');
+                                            this.props.dispatch(set_current_bookID(11));
+                                            navigate('ShowPage');
+                                        } catch (error) {
+                                            console.log('set bookchoose 11 error');
+                                        }
+                                    } else {
+    
+                                    }       
+                                                                                     
+                                } catch (error) {
+                                    console.log('get books names error');
+                                }
+                              }
                             //   this.state.text !== 
-                          }} placeholder = "Search..." />
+                          } placeholder = "Search..." />
             <Icon name="ios-people"/>
           </Item>
           <Button transparent>
@@ -594,7 +707,7 @@ class SecondPage extends Component {
                   } catch (error) {
                     console.log('get Book Num Error(in second page)');
                   }
-            navigate('ShowPage')}}></Button>
+            navigate('ShowPage')}}><Icon name="md-build" /></Button>
         </CardItem>
         </Card>
       
