@@ -224,8 +224,9 @@ import React, { Component } from 'react';
 import { StyleSheet, View, AsyncStorage, TextInput} from 'react-native';
 import { Container, Header, Item, Text, Icon, Button, Input, Card, CardItem} from 'native-base';
 
-import {set_current_bookID} from '../../state/bookID_action'
+import {set_current_bookID,book_name_state_change} from '../../state/bookID_action'
 import {connect} from 'react-redux';
+
 
 class SecondPage extends Component {
     constructor(props) {
@@ -243,15 +244,26 @@ class SecondPage extends Component {
             bkn9: '',
             bkn10: '',
             bkn11: '',
+            bookNames:[0]
         };
+        this.handleBookName = this.handleBookName.bind(this)
       }
-  
+      
+
     static navigationOptions = {
     title: 'Second Page',
     //Sets Header text of Status Bar
+    
   };
   render() {
     const { navigate } = this.props.navigation;
+
+    if(this.props.bookNameChange){
+        console.log('handleBookNameChange (in second page)')
+        this.handleBookName()
+        this.props.dispatch(book_name_state_change(false));
+    }
+    
     return (
         <Container>
         <Header searchBar rounded style={styles.container}>
@@ -288,10 +300,11 @@ class SecondPage extends Component {
             navigate('ShowPage')
             try { 
                 await AsyncStorage.setItem('@BookChoose:Num', '1');
+                
             } catch (error) {
                 console.log('set bookchoose 1 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn1}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[1]}</Text></Button>
         <Button style = {styles.buttonlist} 
         onLayout={async()=>{
             try{
@@ -305,11 +318,13 @@ class SecondPage extends Component {
             this.props.dispatch(set_current_bookID(2));
             navigate('ShowPage')
             try { 
+
                 await AsyncStorage.setItem('@BookChoose:Num', '2');
+                
             } catch (error) {
                 console.log('set bookchoose 2 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn2}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[2]}</Text></Button>
         <Button style = {styles.buttonlist} 
         onLayout={async()=>{
             try{
@@ -327,7 +342,7 @@ class SecondPage extends Component {
             } catch (error) {
                 console.log('set bookchoose 3 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn3}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[3]}</Text></Button>
         </CardItem>
         <CardItem>
         <Button style = {styles.buttonlist} 
@@ -347,7 +362,7 @@ class SecondPage extends Component {
             } catch (error) {
                 console.log('set bookchoose 4 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn4}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[4]}</Text></Button>
         <Button style = {styles.buttonlist} 
         onLayout={async()=>{
             try{
@@ -365,7 +380,7 @@ class SecondPage extends Component {
             } catch (error) {
                 console.log('set bookchoose 5 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn5}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[5]}</Text></Button>
         <Button style = {styles.buttonlist} 
         onLayout={async()=>{
             try{
@@ -383,7 +398,7 @@ class SecondPage extends Component {
             } catch (error) {
                 console.log('set bookchoose 6 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn6}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[6]}</Text></Button>
         </CardItem>
         <CardItem>
         <Button style = {styles.buttonlist} 
@@ -403,7 +418,7 @@ class SecondPage extends Component {
             } catch (error) {
                 console.log('set bookchoose 7 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn7}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[7]}</Text></Button>
         <Button style = {styles.buttonlist} 
         onLayout={async()=>{
             try{
@@ -421,7 +436,7 @@ class SecondPage extends Component {
             } catch (error) {
                 console.log('set bookchoose 8 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn8}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[8]}</Text></Button>
         <Button style = {styles.buttonlist} 
         onLayout={async()=>{
             try{
@@ -439,7 +454,7 @@ class SecondPage extends Component {
             } catch (error) {
                 console.log('set bookchoose 9 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn9}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[9]}</Text></Button>
         </CardItem>
         <CardItem>
         <Button style = {styles.buttonlist} 
@@ -459,7 +474,7 @@ class SecondPage extends Component {
             } catch (error) {
                 console.log('set bookchoose 10 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn10}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[10]}</Text></Button>
         <Button style = {styles.buttonlist} 
         onLayout={async()=>{
             try{
@@ -477,7 +492,7 @@ class SecondPage extends Component {
             } catch (error) {
                 console.log('set bookchoose 11 error');
             }
-        }}><Text style = {styles.buttonText}>{this.state.bkn11}</Text></Button>
+        }}><Text style = {styles.buttonText}>{this.state.bookNames[11]}</Text></Button>
         <Button style = {styles.buttonlist} 
         onPress = {async() =>{
                 try {
@@ -575,7 +590,7 @@ class SecondPage extends Component {
                         }
                     }
                   } catch (error) {
-                    console.log('get Book Num Error');
+                    console.log('get Book Num Error(in second page)');
                   }
             navigate('ShowPage')}}></Button>
         </CardItem>
@@ -598,6 +613,41 @@ class SecondPage extends Component {
       
     );
   }
+
+  componentWillMount(){
+    //AsyncStorage.removeItem('@Book1:Name')
+    //AsyncStorage.removeItem('@Book2:Name')
+    console.log('componentWillMount (in second page)')
+    this.handleBookName()
+  }   
+/*
+  shouldComponentUpdate(){
+      console.log('this.props.bookNameChange(in second page): ',this.props.bookNameChange)
+      if(this.props.bookNameChange){
+          this.handleBookName()
+          this.props.dispatch(book_name_state_change(false));
+      }
+      
+    
+  }*/
+
+  async handleBookName(){
+        var bookNames_=[0]
+        console.log('bookNames_',bookNames_)
+        for(let i=1;i<=11;i++){
+            let bookName = await AsyncStorage.getItem(`@Book${i}:Name`)//`$timelineData{this.props.idx}`
+            console.log(`@Book${i}:Name`,bookName )
+            //bookName = bookName? JSON.parse(bookName) : " "
+            bookNames_.push(bookName)
+        }
+        console.log('bookNames_2',bookNames_)
+        this.setState({
+            bookNames:bookNames_
+        });
+  }
+
+
+
 }
 const styles = StyleSheet.create({
   buttonText: {
@@ -646,5 +696,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(state => ({
-    currentID : state.CurrentID.currentID
+    currentID : state.CurrentID.currentID,
+    bookNameChange: state.BookName.bookNameChange
 }))(SecondPage);

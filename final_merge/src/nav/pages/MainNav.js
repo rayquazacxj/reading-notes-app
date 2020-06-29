@@ -11,7 +11,7 @@ import loggerMiddleware from 'redux-logger';
 import {Provider, connect} from 'react-redux';
 
 import {ConnectMindmapItem , MindmapInfo} from '../../state/mindmap_reducer'
-import {CurrentID} from '../../state/bookID_reducer'
+import {CurrentID,BookName} from '../../state/bookID_reducer'
 
 import Home from './Home'
 import ShareScreen from './ShareScreen'
@@ -21,13 +21,13 @@ import PictureGen from './pictureGen2'
 import Mindmap from './mindmap'
 import SecondPage from './SecondPage'
 //import ThirdPage from './ShowPage'
-import ShowPage2 from './ShowPage'
+import ShowPage from './ShowPage'
 import ForthPage from './ForthPage'
 
 const Stack = createStackNavigator()
 
 const appReducer = {
-  ConnectMindmapItem,MindmapInfo,CurrentID
+  ConnectMindmapItem,MindmapInfo,CurrentID,BookName
 };
 
 const store = createStore(combineReducers(appReducer), 
@@ -85,9 +85,11 @@ export default class MainNav extends React.Component {
                 {screenProps => <Profile {...screenProps} updateAuth={this.props.updateAuth} />}
               </Stack.Screen>
 
-              
+              <Stack.Screen name="ShowPage">
+                {screenProps => <ShowPage {...screenProps} updateAuth={this.props.updateAuth} />}
+              </Stack.Screen>
 
-              <Stack.Screen name="ShowPage" component={ShowPage2} />
+             
               <Stack.Screen name="Timeline" component={Timelinee} />
               <Stack.Screen name="Mindmap" component={Mindmap} />
               <Stack.Screen name="PictureGen" component={PictureGen} />

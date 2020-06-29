@@ -14,3 +14,21 @@ export function CurrentID(state = initCurrentID, action) {
             return state;
     }
 }
+
+
+const initBkNameState = {
+    bookNameChange:false
+};
+
+export function BookName(state = initBkNameState, action) {
+    switch (action.type) {
+        case '@BOOK_NAME/BK_NAME_STATE_CHANGE':
+            return {
+                ...state,
+                bookNameChange:action.bookNameChange
+            }
+
+        default:
+            return state;
+    }
+}

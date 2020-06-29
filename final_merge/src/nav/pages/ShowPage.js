@@ -5,12 +5,14 @@ import { StyleSheet, AsyncStorage, TextInput} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Button, Body, Input} from 'native-base';
 import { Value } from 'react-native-reanimated';
 //import all the components we are going to use.
+import {connect} from 'react-redux';
+import { book_name_state_change } from '../../state/bookID_action'
 
 export function UselessTextInput() {
   const [value, onChangeText] = React.useState('Useless Placeholder');
 }
 
-export default class ThirdPage extends Component {
+class ShowPage extends Component {
   
   constructor(props) {
     super(props);
@@ -25,6 +27,10 @@ export default class ThirdPage extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+
+    
+    //console.log(this.props)
+
     return (
       
       <Container style={styles.container}>
@@ -45,6 +51,12 @@ export default class ThirdPage extends Component {
                           onEndEditing = {async () => {
                             try {
                                 //@bookchoose
+                                //this.props.dispatch(book_name_state_change(1));
+                                //console.log('bkName_change(in showPage)')
+                                this.props.dispatch(book_name_state_change(true));
+                                console.log('bkName_change(in showPage)')
+                              
+
                               const value = await AsyncStorage.getItem('@BookChoose:Num');
                               if (value === '1') {
                                   try {
@@ -146,7 +158,7 @@ export default class ThirdPage extends Component {
                                   console.log('BookNum > 12');
                               }
                             } catch (error) {
-                              console.log('get Book Num Error');
+                              console.log('get Book Num Error(in show page)');
                             }
                           //   try {
                           //   await AsyncStorage.setItem('@ThirdPage:bookName', this.state.text);
@@ -393,6 +405,8 @@ export default class ThirdPage extends Component {
                               } else {
                                   console.log('BookNum > 12');
                               }
+
+                              
                             } catch (error) {
                               console.log('get Book Num Error');
                             }              
@@ -479,3 +493,8 @@ const styles = StyleSheet.create({
     color: 'rgba(0,0,0,0.6)',
   },
 });
+
+export default connect(state => ({
+    currentID : state.CurrentID.currentID,
+    bookNameChange: state.BookName.bookNameChange
+}))(ShowPage);
