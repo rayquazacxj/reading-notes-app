@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   },
 });
 */
-import React, { Component } from 'react';
+import React, { Component, version } from 'react';
 //import react in our code. 
 import { StyleSheet, View, AsyncStorage, TextInput} from 'react-native';
 import { Container, Header, Item, Text, Icon, Button, Input, Card, CardItem} from 'native-base';
@@ -606,12 +606,21 @@ class SecondPage extends Component {
                 console.log('set bookchoose 11 error');
             }
         }}><Text style = {styles.buttonText}>{this.state.bookNames[11]}</Text></Button>
-        <Button style = {styles.buttonlist} 
+        <Button style = {styles.buttonlist2} 
         onPress = {async() =>{
                 try {
                     
-
+                    //await AsyncStorage.removeItem('@BookNum:count');
+                    
+                    //const value = await AsyncStorage.getItem('@BookNum:count');
+                    //console.log('value: ',value)
+                    //console.log('value2: ', (((value).parseInt() ) +1).toString())
+                    
+                   
                     const value = await AsyncStorage.getItem('@BookNum:count');
+                   // let val = (value).parseInt()
+                   // console.log('value2: ', val)
+
                     if (value === NaN) {
                         try {
                             await AsyncStorage.setItem('@BookNum:count', '1');
@@ -771,11 +780,19 @@ const styles = StyleSheet.create({
   },
   
     container: {
-    borderRadius:15,
+    //borderRadius:15,
     marginTop: 25,
     marginBottom:15,
     height:60,
     backgroundColor: '#bddccb',
+
+    borderWidth: 3,
+    borderColor: 'rgba(173,173,173,0.8)',
+    borderLeftWidth:0,
+    borderTopWidth:0,
+    borderRightWidth:0
+    
+
     
   },
   cardstyle: {
@@ -796,21 +813,60 @@ const styles = StyleSheet.create({
       marginTop: -3,
       marginVertical:-9,
       backgroundColor: 'rgba(198,223,211,0.7)',
+
+
+    borderWidth: 3,
+    borderColor: 'rgba(173,173,173,0.8)',
+    borderTopWidth:0,
+    borderLeftWidth:0,
+
+        
   },
+  buttonlist2: {
+    width: 100,
+    height: 100,
+    borderRadius:7,
+    marginHorizontal:3,
+    marginLeft:17,
+    marginTop: -3,
+    marginVertical:-9,
+    backgroundColor: 'rgba(0,153,0,0.7)',
+
+
+  borderWidth: 3,
+  borderColor: 'rgba(173,173,173,0.8)',
+  borderTopWidth:0,
+  borderLeftWidth:0,
+
+},
+
   bottomBar: {
     backgroundColor: 'rgba(198,223,211,0.7)',
+    
+    borderWidth: 2,
+    borderColor: 'rgba(173,173,173,0.5)',
+    borderRightWidth:0,
+    borderBottomWidth:0,
+    borderLeftWidth:0,
     
   },
 
   bottomButton: {
-    backgroundColor: 'rgba(95,163,177,0.5)',
+    //backgroundColor: 'rgba(95,163,177,0.5)',
+    backgroundColor: 'rgba(0,153,76,0.5)',
     borderRadius: 20,
     width:95,
     marginHorizontal:15,
+
+    borderWidth: 2,
+    borderColor: 'rgba(76,153,0,0.8)',
+    borderTopWidth:0,
+    borderLeftWidth:0,
   },
 });
 
 export default connect(state => ({
     currentID : state.CurrentID.currentID,
     bookNameChange: state.BookName.bookNameChange
+
 }))(SecondPage);

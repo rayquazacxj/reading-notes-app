@@ -453,7 +453,7 @@ class ShowPage extends Component {
               </Right>
              </CardItem>
 
-             <CardItem style = {styles.BASA}>
+             <CardItem style = {styles.BASA2}>
               <Icon active name="logo-googleplus" />
               <Button onPress = {() =>navigate('ForthPage')} style = {styles.addNote}><Text>Add Note</Text></Button>
               <Right>
@@ -470,7 +470,7 @@ class ShowPage extends Component {
               
               <Button style = {styles.bottomButton}><Text> PROFILE</Text></Button>
               
-              <Button style = {styles.bottomButton} onPress={() =>navigate('EighthPage')}><Text>TIMELINE</Text></Button>
+              <Button style = {styles.bottomButton} onPress={() =>navigate('EighthPage')}><Text style={{fontSize:13}}>TIMELINE</Text></Button>
              </CardItem>
         </Card>
       </Container>
@@ -506,18 +506,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fffff8',
+
+    
   },
   addNote: {
-    backgroundColor: 'rgba(0,0,0,0.3)',
+    //backgroundColor: 'rgba(0,0,0,0.3)',
+    backgroundColor: 'rgba(0,153,76,0.5)',
     borderRadius:15,
+
+    borderWidth: 2,
+    borderColor: 'rgba(76,153,0,0.8)',
+    borderTopWidth:0,
+    borderLeftWidth:0,
   },
   uploadImg: {
     borderRadius: 15,
     marginVertical: 95,
+    backgroundColor: 'rgba(198,223,211,0.5)',
+    
   },
 
   textImg: {
     marginHorizontal: 30,
+    fontSize:18,
+    opacity:0.5
   },
 
   bottomBar: {
@@ -526,10 +538,16 @@ const styles = StyleSheet.create({
   },
 
   bottomButton: {
-    backgroundColor: 'rgba(95,163,177,0.5)',
+    //backgroundColor: 'rgba(95,163,177,0.5)',
+    backgroundColor: 'rgba(0,153,76,0.5)',
     borderRadius: 20,
     width:95,
     marginHorizontal:15,
+
+    borderWidth: 2,
+    borderColor: 'rgba(76,153,0,0.8)',
+    borderTopWidth:0,
+    borderLeftWidth:0,
   },
 
   uploadImgBlock: {
@@ -538,11 +556,28 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: 200,
     height: 250,
+
+    borderWidth: 5,
+    borderColor: 'red',//'rgba(173,173,173,0.9)',
+    borderTopWidth:0,
+    borderLeftWidth:0,
   },
 
   BASA: {
     backgroundColor: '#fffff8',
-    fontSize: 17,
+    fontSize: 20,
+    color: 'rgba(0,0,0,0.6)',
+
+    borderWidth: 2,
+    borderColor: 'rgba(0,102,0,0.5)',
+    borderTopWidth:0,
+    borderLeftWidth:0,
+    borderRightWidth:0
+  },
+
+  BASA2: {
+    backgroundColor: '#fffff8',
+    fontSize: 20,
     color: 'rgba(0,0,0,0.6)',
   },
 });

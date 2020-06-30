@@ -165,7 +165,13 @@ const styles = StyleSheet.create({
         width: 250,
         borderRadius: 30,
         backgroundColor: "#5f9ea0",
-        opacity:0.7
+        opacity:0.7,
+
+        borderWidth: 3,
+        borderColor: 'rgba(128,128,128,0.6)',
+        borderTopWidth:0,
+        
+        borderLeftWidth:0,
         
         
     },
