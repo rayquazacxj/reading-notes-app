@@ -21,8 +21,9 @@ Demo : https://drive.google.com/file/d/1OcUSYX4LfOS-kq_UrQw0URj41gneDZRE/view?us
 ![](https://github.com/rayquazacxj/reading-notes-app/blob/master/timeline%20demo.png)
 
 3. 佳句小卡: 輕鬆搭配喜歡的小卡及各種進階樣式，將想好好保存下來的一句話或一段文字升級成質感小卡來珍藏或分享給他人。
-![](https://github.com/rayquazacxj/reading-notes-app/blob/master/card%20demo.png)
 (圖片來源: https://spark.adobe.com/zh-Hant-TW/sp)
+![](https://github.com/rayquazacxj/reading-notes-app/blob/master/card%20demo.png)
+
 
 4. 登入    : 可利用Google,Amazon帳號登入
 5. 建立筆記
