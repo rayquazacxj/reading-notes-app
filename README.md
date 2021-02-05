@@ -15,11 +15,13 @@ Demo : https://drive.google.com/file/d/1OcUSYX4LfOS-kq_UrQw0URj41gneDZRE/view?us
 功能介紹:
 
 1. 心智圖  : 適用於結構化與圖像化靈感或書中內容，幫助使用者快速整理或回想所記錄內容的邏輯關係。 
+![](https://github.com/rayquazacxj/reading-notes-app/blob/master/mindmap%20demo.jpg)
 
 2. 時間軸  : 適用於結構化與圖像化書中內容，幫助使用者快速整理或回想所記錄內容的時空間的邏輯關係。
+![](https://github.com/rayquazacxj/reading-notes-app/blob/master/timeline%20demo.png)
 
 3. 佳句小卡: 輕鬆搭配喜歡的小卡及各種進階樣式，將想好好保存下來的一句話或一段文字升級成質感小卡來珍藏或分享給他人。
-
+![](https://github.com/rayquazacxj/reading-notes-app/blob/master/card%20demo.png)
 (圖片來源: https://spark.adobe.com/zh-Hant-TW/sp)
 
 4. 登入    : 可利用Google,Amazon帳號登入
