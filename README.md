@@ -31,3 +31,13 @@ Demo : https://drive.google.com/file/d/1OcUSYX4LfOS-kq_UrQw0URj41gneDZRE/view?us
 6. 分類筆記
 7. 搜尋筆記
 8. 拍照
+
+
+```
+Usage
+
+npm install
+react-native start
+react-native run-android
+```
+
